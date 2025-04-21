@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://tde5knwa1klm"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
+[ext_resource type="Shader" path="res://Shaders/pixelate.gdshader" id="2_vy4gx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_dxj2d"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8q2x0"]
+render_priority = 0
+shader = ExtResource("2_vy4gx")
+shader_parameter/pixel_size = 4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_miu7r"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_g5mu6")
+camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_w3crd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
+current = true
+
+[node name="PixelationEffect" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.589509)
+mesh = SubResource("QuadMesh_dxj2d")
+surface_material_override/0 = SubResource("ShaderMaterial_8q2x0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_miu7r")

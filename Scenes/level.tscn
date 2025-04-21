@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://crtben0wguo60"]
+
+[ext_resource type="Shader" path="res://Shaders/pixelate.gdshader" id="1_hr3ai"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s7oo3"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1gxrm"]
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_35r42"]
+render_priority = 0
+shader = ExtResource("1_hr3ai")
+
+[node name="Level" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_s7oo3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.260831, 0.91854)
+
+[node name="PixelationEffect" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.589509)
+mesh = SubResource("QuadMesh_1gxrm")
+surface_material_override/0 = SubResource("ShaderMaterial_35r42")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.211154, 0.977453, 0, -0.977453, 0.211154, 0, 1.71131, 0)

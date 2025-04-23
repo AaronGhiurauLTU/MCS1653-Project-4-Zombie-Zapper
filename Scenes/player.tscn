@@ -1,24 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://tde5knwa1klm"]
+[gd_scene load_steps=5 format=3 uid="uid://tde5knwa1klm"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
-[ext_resource type="Shader" path="res://Shaders/pixelate.gdshader" id="2_vy4gx"]
 [ext_resource type="PackedScene" uid="uid://bi3f53swbp2sh" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_dxj2d"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8q2x0"]
-render_priority = 0
-shader = ExtResource("2_vy4gx")
-shader_parameter/pixel_size = 4
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_miu7r"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "cameraEffects")]
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
-cameraEffects = NodePath("Camera3D/PixelationEffect")
+cameraEffects = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_w3crd")
@@ -26,11 +18,6 @@ shape = SubResource("CapsuleShape3D_w3crd")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
 current = true
-
-[node name="PixelationEffect" type="MeshInstance3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-mesh = SubResource("QuadMesh_dxj2d")
-surface_material_override/0 = SubResource("ShaderMaterial_8q2x0")
 
 [node name="gun" parent="Camera3D" instance=ExtResource("3_ko6w2")]
 transform = Transform3D(-0.25, -4.37114e-08, -9.55339e-16, 0, -2.18557e-08, 0.25, -2.18557e-08, 0.5, 1.09278e-08, 0.196969, -0.277698, -0.577093)

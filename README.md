@@ -45,7 +45,8 @@
 
 6. **Did you get help from any online websites, videos, or tutorials?** <br> (link them here)
 
-3D Pixelation Shader:https://godotshaders.com/shader/3d-pixelation-filter/
+Unused 3D Pixelation Shader: https://godotshaders.com/shader/3d-pixelation-filter/
+Current 3D Pixelation Shader: https://godotshaders.com/shader/pixelate-screen-effect/
 
 <br>
 

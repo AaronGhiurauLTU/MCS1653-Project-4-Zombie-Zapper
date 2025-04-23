@@ -39,7 +39,7 @@
 
 5. **Did you get help from any AI Code Assistants?** <br> (Tell us which .cs file to look in for the citation and describe what you learned)
 
-
+I had issues with rendering instantiated objects with the first shader to create the pixelated effect and tried using ChatGPT to help but it didn't provide any working solutions. I found a different shader that achieved the same effect but did not have this issue.
 
 <br>
 

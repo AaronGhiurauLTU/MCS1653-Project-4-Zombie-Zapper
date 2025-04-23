@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfiyr2tm4ioxs"]
+[gd_scene load_steps=6 format=3 uid="uid://dfiyr2tm4ioxs"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_uqw5r"]
+[ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="2_k0p3a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j4f4x"]
 
@@ -10,9 +11,11 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ue8xm"]
 material = SubResource("StandardMaterial3D_wnpro")
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("agent")]
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("agent", "health")]
 script = ExtResource("1_uqw5r")
+speed = 4.0
 agent = NodePath("NavigationAgent3D")
+health = NodePath("Health")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_j4f4x")
@@ -21,3 +24,5 @@ shape = SubResource("CapsuleShape3D_j4f4x")
 mesh = SubResource("CapsuleMesh_ue8xm")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Health" parent="." instance=ExtResource("2_k0p3a")]

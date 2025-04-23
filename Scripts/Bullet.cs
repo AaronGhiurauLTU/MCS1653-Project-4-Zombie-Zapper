@@ -3,7 +3,8 @@ using System;
 
 public partial class Bullet : Node3D
 {
-	[Export] private float speed = 10;
+	public int pierce = 1, damage = 1;
+	public float speed = 10;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,5 +20,20 @@ public partial class Bullet : Node3D
 	private void OnTimeout()
 	{
 		QueueFree();
+	}
+
+	private void OnBodyEntered(Node3D body)
+	{
+		if (body is Enemy enemy)
+		{
+			pierce--;
+
+			if (pierce <= 0)
+			{
+				QueueFree();
+			}
+			
+			enemy.health.TakeDamage(damage);
+		}
 	}
 }

@@ -11,23 +11,24 @@ refraction_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8ktcl"]
 
-[node name="Node3D" type="Node3D"]
+[node name="bullet" type="Node3D"]
 script = ExtResource("1_welqw")
 
-[node name="bullet" type="MeshInstance3D" parent="."]
+[node name="Node3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.09278e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.09278e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_v8erb")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_qskj3")
 
-[node name="Area3D" type="Area3D" parent="bullet"]
+[node name="Area3D" type="Area3D" parent="Node3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="bullet/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
 shape = SubResource("SphereShape3D_8ktcl")
 
-[node name="Timer" type="Timer" parent="bullet"]
+[node name="Timer" type="Timer" parent="Node3D"]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="bullet/Timer" to="." method="OnTimeout"]
+[connection signal="body_entered" from="Node3D/Area3D" to="." method="OnBodyEntered"]
+[connection signal="timeout" from="Node3D/Timer" to="." method="OnTimeout"]

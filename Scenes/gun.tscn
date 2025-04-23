@@ -16,6 +16,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
 script = ExtResource("1_vf6t7")
 bulletSpawn = NodePath("bullet_spawn")
 bulletScenePath = "res://Scenes/bullet.tscn"
+bulletDamage = 2
+bulletSpeed = 25.0
 
 [node name="bullet_spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758631, -6.63217e-08)

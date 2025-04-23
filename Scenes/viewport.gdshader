@@ -3,6 +3,7 @@ render_mode unshaded;
 
 uniform int pixel_size = 4; //resolution must be divisible by pixel_size
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+uniform sampler2D viewport_texture;
 
 void fragment() {
 	float x = float(int(FRAGCOORD.x) % pixel_size);
@@ -11,5 +12,5 @@ void fragment() {
 	x = FRAGCOORD.x + floor(float(pixel_size) / 2.0) - x;
 	y = FRAGCOORD.y + floor(float(pixel_size) / 2.0) - y;
 
-	ALBEDO = texture(SCREEN_TEXTURE, vec2(x, y) / VIEWPORT_SIZE).xyz;
+	ALBEDO = texture(viewport_texture, vec2(x, y) / VIEWPORT_SIZE).xyz;
 }

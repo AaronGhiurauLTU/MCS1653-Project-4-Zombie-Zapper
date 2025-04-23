@@ -8,10 +8,12 @@ public partial class Player : CharacterBody3D
 	[Export] private float minLookDownAngle = -45, 
 		maxLookDownAngle = 45;
 	[Export] private float cameraSensitivity = 0.05f;
+	[Export] private MeshInstance3D cameraEffects;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		//cameraEffects.MaterialOverride.RenderPriority = 1;
 	}
 	public override void _PhysicsProcess(double delta)
 	{

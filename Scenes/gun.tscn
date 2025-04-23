@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi3f53swbp2sh"]
+
+[ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_vf6t7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y2wnb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7qas"]
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_50jlm"]
+
+[node name="gun" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn")]
+transform = Transform3D(0.25, 0, 0, 0, -2.18557e-08, 0.25, 0, -0.5, -1.09278e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_y2wnb")
+surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
+script = ExtResource("1_vf6t7")
+bulletSpawn = NodePath("bullet_spawn")
+bulletScenePath = "res://Scenes/bullet.tscn"
+
+[node name="bullet_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758631, -6.63217e-08)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bullet_spawn"]
+visible = false
+mesh = SubResource("BoxMesh_50jlm")

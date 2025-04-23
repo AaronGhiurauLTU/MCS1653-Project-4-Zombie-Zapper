@@ -1,0 +1,23 @@
+using Godot;
+using System;
+
+public partial class Bullet : Node3D
+{
+	[Export] private float speed = 10;
+	
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		Position += (float)delta * speed * -1 * GlobalTransform.Basis.Y;
+	}
+
+	private void OnTimeout()
+	{
+		QueueFree();
+	}
+}

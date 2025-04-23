@@ -21,4 +21,3 @@ shape = SubResource("WorldBoundaryShape3D_eksll")
 transform = Transform3D(1, 0, 0, 0, 0.211154, 0.977453, 0, -0.977453, 0.211154, 0, 1.71131, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_ax62n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25112, 0)

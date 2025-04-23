@@ -15,7 +15,6 @@ public partial class Gun : MeshInstance3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
-		//GD.Print(bulletSpawn.GlobalRotationDegrees + " " + bulletSpawn.GlobalTransform.Basis.Z);
 		if (Input.IsActionJustPressed("fire"))
 		{
 			Node3D bullet = (Node3D)bulletScene.Instantiate();
@@ -23,13 +22,7 @@ public partial class Gun : MeshInstance3D
 			bullet.Position = bulletSpawn.GlobalPosition;
 			bullet.Basis = bulletSpawn.GlobalTransform.Basis;
 			bullet.Scale = new Vector3(1,1,1);
-
-			//bullet.RotateZ(Mathf.DegToRad(90));
-			//GD.Print(GetParent().GetParent().GetParent().Name);
-			//bulletSpawn.RemoveChild(bullet);
-			this.GetParent().GetParent().GetParent().AddChild(bullet);
-		
-			GD.Print(bullet.GetParent().Name);
+			GetParent().GetParent().GetParent().AddChild(bullet);
 		}
 	}
 }

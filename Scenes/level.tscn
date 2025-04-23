@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://crtben0wguo60"]
+[gd_scene load_steps=10 format=3 uid="uid://crtben0wguo60"]
 
 [ext_resource type="PackedScene" uid="uid://tde5knwa1klm" path="res://Scenes/player.tscn" id="1_ax62n"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_s7oo3"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_eksll"]
+[ext_resource type="PackedScene" uid="uid://dfiyr2tm4ioxs" path="res://Scenes/enemy.tscn" id="2_muvt3"]
 
 [sub_resource type="Shader" id="Shader_6tbh1"]
 code = "shader_type canvas_item;
@@ -29,22 +26,25 @@ shader = SubResource("Shader_6tbh1")
 shader_parameter/pixel_size = 8
 shader_parameter/screen_size = Vector2(1920, 1080)
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_6xlou"]
+vertices = PackedVector3Array(10.5, 0.5, 5.75, 10.75, 0.5, 7.5, 19.5, 0.5, 7.25, 19.5, 0.5, -19.5, -19.5, 0.5, 8, -10.5, 0.5, 8, -10.25, 0.5, 5.75, -19.5, 0.5, -19.5, -9.5, 10.5, 6.75, -9.5, 10.5, 25.75, 9.5, 10.5, 25.75, 9.5, 10.5, 6.75, -9.25, 0.5, 7, -9.25, 0.5, 19.5, 9.5, 0.5, 19.5, 9.5, 0.5, 7, 10.75, 0.5, 19.5, 19.5, 0.5, 19.5, -19.5, 0.5, 19.5, -10.5, 0.5, 19.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(0, 6, 3), PackedInt32Array(3, 6, 7), PackedInt32Array(11, 10, 8), PackedInt32Array(8, 10, 9), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(16, 1, 17), PackedInt32Array(17, 1, 2), PackedInt32Array(19, 18, 5), PackedInt32Array(5, 18, 4)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s7oo3"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_eksll"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bh0ax"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8s8d"]
+
 [node name="Level" type="Node3D"]
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
-mesh = SubResource("PlaneMesh_s7oo3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_eksll")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.211154, 0.977453, 0, -0.977453, 0.211154, 0, 1.71131, 0)
 
 [node name="Player" parent="." instance=ExtResource("1_ax62n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52266, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6993, 1.49708, 9.53345)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -64,3 +64,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_6xlou")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_s7oo3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_eksll")
+
+[node name="Floor2" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 16.275)
+mesh = SubResource("BoxMesh_bh0ax")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor2/StaticBody3D"]
+shape = SubResource("BoxShape3D_b8s8d")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_muvt3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.674, 1.13433, 13.9337)
+target = NodePath("../Player")

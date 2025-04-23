@@ -48,6 +48,8 @@
 Unused 3D Pixelation Shader: https://godotshaders.com/shader/3d-pixelation-filter/
 Current 3D Pixelation Shader: https://godotshaders.com/shader/pixelate-screen-effect/
 
+Godot Pathfinding Navigation AI: https://www.youtube.com/watch?v=EOocBMBbL-E
+
 <br>
 
 7. **What trouble did you have with this project?**

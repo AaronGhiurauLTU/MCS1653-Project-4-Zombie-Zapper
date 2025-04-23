@@ -32,8 +32,13 @@ public partial class Bullet : Node3D
 			{
 				QueueFree();
 			}
-			
+
 			enemy.health.TakeDamage(damage);
+		}
+		else
+		{
+			// destroy bullet when it collides with level
+			QueueFree();
 		}
 	}
 }

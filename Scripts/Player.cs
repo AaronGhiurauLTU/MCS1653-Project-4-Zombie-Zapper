@@ -8,12 +8,24 @@ public partial class Player : CharacterBody3D
 	[Export] private float minLookDownAngle = -45, 
 		maxLookDownAngle = 45;
 	[Export] private float cameraSensitivity = 0.05f;
-	[Export] private MeshInstance3D cameraEffects;
+
+	[Export] public Health health;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		//cameraEffects.MaterialOverride.RenderPriority = 1;
+		health.HealthDepleted += OnHealthDepleted;
+		health.HealthChanged += OnHealthChanged;
+	}
+
+	private void OnHealthDepleted()
+	{
+		GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
+	}
+
+	private void OnHealthChanged(int newHealth)
+	{
+
 	}
 	public override void _PhysicsProcess(double delta)
 	{

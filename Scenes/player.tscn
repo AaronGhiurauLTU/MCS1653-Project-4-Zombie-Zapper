@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://tde5knwa1klm"]
+[gd_scene load_steps=6 format=3 uid="uid://tde5knwa1klm"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
+[ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="3_a2i75"]
 [ext_resource type="PackedScene" uid="uid://bi3f53swbp2sh" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_miu7r"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health")]
+collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
+health = NodePath("Health")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_w3crd")
@@ -24,3 +27,5 @@ skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_miu7r")
+
+[node name="Health" parent="." instance=ExtResource("3_a2i75")]

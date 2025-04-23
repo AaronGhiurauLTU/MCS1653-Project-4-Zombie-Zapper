@@ -6,9 +6,10 @@ public partial class Enemy : CharacterBody3D
 	[Export] private float speed = 2, accel = 18;
 	[Export] private Node3D target;
 	[Export] private NavigationAgent3D agent;
+	[Export] private int damage = 1;
 	[Export] public Health health;
 	private bool setup = false;
-
+	private Player playerBeingAttacked;
 	public override void _Ready()
 	{
 		health.HealthDepleted += OnHealthDepleted;
@@ -43,5 +44,30 @@ public partial class Enemy : CharacterBody3D
 		Velocity = Velocity.Lerp(direction * speed, accel * (float)delta);
 
 		MoveAndSlide();
+	}
+
+	private void OnHurtBoxEntered(Node3D body)
+	{
+		if (body is Player player)
+		{
+			playerBeingAttacked = player;
+			Attack();
+		}
+	}
+
+	private void OnHurtBoxExited(Node3D body)
+	{
+		if (body is Player player && playerBeingAttacked == player)
+		{
+			playerBeingAttacked = null;
+		}
+	}
+
+	private void Attack()
+	{
+		if (playerBeingAttacked == null)
+			return;
+
+		playerBeingAttacked.health.TakeDamage(damage);
 	}
 }

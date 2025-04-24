@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://tde5knwa1klm"]
+[gd_scene load_steps=7 format=3 uid="uid://tde5knwa1klm"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="3_a2i75"]
 [ext_resource type="PackedScene" uid="uid://bi3f53swbp2sh" path="res://Scenes/gun.tscn" id="3_ko6w2"]
+[ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
 
@@ -28,4 +29,16 @@ skeleton = NodePath("../..")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_miu7r")
 
-[node name="Health" parent="." instance=ExtResource("3_a2i75")]
+[node name="Health" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("3_a2i75")]
+healthBar = NodePath("../Control/HealthBar")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 40.0
+
+[node name="HealthBar" parent="Control" instance=ExtResource("4_l0ejn")]
+layout_mode = 0
+offset_right = 306.0
+offset_bottom = 16.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfiyr2tm4ioxs"]
+[gd_scene load_steps=10 format=3 uid="uid://dfiyr2tm4ioxs"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_uqw5r"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="2_k0p3a"]
+[ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="3_4wis3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j4f4x"]
 
@@ -16,11 +17,14 @@ radius = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_etl28"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_nh2ka"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("agent", "health", "attackCooldown")]
-collision_layer = 2
+collision_layer = 3
+collision_mask = 5
 script = ExtResource("1_uqw5r")
 agent = NodePath("NavigationAgent3D")
-damage = 3
 health = NodePath("Health")
 attackCooldown = NodePath("AttackCooldown")
 
@@ -32,7 +36,8 @@ mesh = SubResource("CapsuleMesh_ue8xm")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="Health" parent="." instance=ExtResource("2_k0p3a")]
+[node name="Health" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("2_k0p3a")]
+healthBar = NodePath("../SubViewport/HealthBar")
 
 [node name="HurtBox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
@@ -43,11 +48,26 @@ collision_mask = 4
 shape = SubResource("CapsuleShape3D_qv63g")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31611, -0.109842)
 mesh = SubResource("SphereMesh_etl28")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 250)
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("3_4wis3")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+grow_horizontal = 2
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+texture = SubResource("ViewportTexture_nh2ka")
 
 [connection signal="body_entered" from="HurtBox" to="." method="OnHurtBoxEntered"]
 [connection signal="body_exited" from="HurtBox" to="." method="OnHurtBoxExited"]

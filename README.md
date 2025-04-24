@@ -50,6 +50,8 @@ Current 3D Pixelation Shader: https://godotshaders.com/shader/pixelate-screen-ef
 
 Godot Pathfinding Navigation AI: https://www.youtube.com/watch?v=EOocBMBbL-E
 
+Displaying 2D healthbars in 3D: https://www.youtube.com/watch?v=AAB6JwI3LVA
+
 <br>
 
 7. **What trouble did you have with this project?**

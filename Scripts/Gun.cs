@@ -17,6 +17,7 @@ public partial class Gun : MeshInstance3D
 	public override void _Ready()
 	{
 		bulletScene = GD.Load<PackedScene>(bulletScenePath);
+		LookToCenter(GetViewport().GetCamera3D());
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,12 +36,17 @@ public partial class Gun : MeshInstance3D
 			bullet.Position = bulletSpawn.GlobalPosition;
 			bullet.Basis = bulletSpawn.GlobalTransform.Basis;
 			bullet.Scale = new Vector3(1,1,1);
-			GetParent().GetParent().GetParent().AddChild(bullet);
+			GetParent().GetParent().GetParent().GetParent().AddChild(bullet);
 		}
 	}
 
 	private void OnAttackCooldownTimeout()
 	{
 		onAttackCooldown = false;
+	}
+
+	public void LookToCenter(Node3D camera)
+	{
+		LookAt(camera.GlobalPosition + (camera.GlobalTransform.Basis.Z * 10000.0f));
 	}
 }

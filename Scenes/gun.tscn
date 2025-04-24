@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi3f53swbp2sh"]
+[gd_scene load_steps=7 format=3 uid="uid://bi3f53swbp2sh"]
 
 [ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_vf6t7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y2wnb"]
+radius = 0.0005
+height = 0.001
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7qas"]
 albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_50jlm"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xyn8f"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_n3kgf"]
+
 [node name="gun" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn", "attackCooldown")]
-transform = Transform3D(0.25, 0, 0, 0, -2.18557e-08, 0.25, 0, -0.5, -1.09278e-08, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_y2wnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
 script = ExtResource("1_vf6t7")
@@ -20,13 +26,22 @@ bulletSpeed = 25.0
 attackCooldown = NodePath("AttackCooldown")
 
 [node name="bullet_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.222468, 1.94487e-08)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.0167567, -1.46499e-09)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="bullet_spawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.284395, 1.86265e-08)
 visible = false
 mesh = SubResource("BoxMesh_50jlm")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, -4.37114e-08, 0.25, 0, -1, -1.09278e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_xyn8f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, 0.4, 0, -0.4, -1.74846e-08, 0, -2.18079e-08, 0.912748)
+mesh = SubResource("SphereMesh_n3kgf")
 
 [connection signal="timeout" from="AttackCooldown" to="." method="OnAttackCooldownTimeout"]

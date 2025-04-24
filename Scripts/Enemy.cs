@@ -8,8 +8,12 @@ public partial class Enemy : CharacterBody3D
 	[Export] private NavigationAgent3D agent;
 	[Export] private int damage = 1;
 	[Export] public Health health;
+	[Export] private Timer attackCooldown;
 	private bool setup = false;
 	private Player playerBeingAttacked;
+
+	private bool onAttackCooldown = false;
+
 	public override void _Ready()
 	{
 		health.HealthDepleted += OnHealthDepleted;
@@ -41,9 +45,16 @@ public partial class Enemy : CharacterBody3D
 		direction = agent.GetNextPathPosition() - GlobalPosition;
 		direction = direction.Normalized();
 
+		Vector3 lookPosition = GlobalPosition + direction;
+		lookPosition.Y = GlobalPosition.Y;
+
+		LookAt(lookPosition);
 		Velocity = Velocity.Lerp(direction * speed, accel * (float)delta);
 
 		MoveAndSlide();
+
+		if (playerBeingAttacked != null)
+			Attack();
 	}
 
 	private void OnHurtBoxEntered(Node3D body)
@@ -65,9 +76,18 @@ public partial class Enemy : CharacterBody3D
 
 	private void Attack()
 	{
-		if (playerBeingAttacked == null)
+		if (playerBeingAttacked == null || onAttackCooldown)
 			return;
+		
+		onAttackCooldown = true;
 
+		attackCooldown.Start();
+		
 		playerBeingAttacked.health.TakeDamage(damage);
+	}
+
+	private void OnAttackCooldownTimeout()
+	{
+		onAttackCooldown = false;
 	}
 }

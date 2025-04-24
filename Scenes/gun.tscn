@@ -9,15 +9,15 @@ albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_50jlm"]
 
-[node name="gun" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn")]
+[node name="gun" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn", "attackCooldown")]
 transform = Transform3D(0.25, 0, 0, 0, -2.18557e-08, 0.25, 0, -0.5, -1.09278e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_y2wnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
 script = ExtResource("1_vf6t7")
 bulletSpawn = NodePath("bullet_spawn")
 bulletScenePath = "res://Scenes/bullet.tscn"
-bulletDamage = 2
 bulletSpeed = 25.0
+attackCooldown = NodePath("AttackCooldown")
 
 [node name="bullet_spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758631, -6.63217e-08)
@@ -25,3 +25,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758631, -6.63217e-08)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="bullet_spawn"]
 visible = false
 mesh = SubResource("BoxMesh_50jlm")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="AttackCooldown" to="." method="OnAttackCooldownTimeout"]

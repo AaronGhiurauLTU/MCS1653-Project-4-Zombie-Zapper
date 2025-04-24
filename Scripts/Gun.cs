@@ -9,6 +9,9 @@ public partial class Gun : MeshInstance3D
 		bulletDamage = 1;
 
 	[Export] private float bulletSpeed = 10;
+	[Export] private Timer attackCooldown;
+	private bool onAttackCooldown = false;
+
 	private PackedScene bulletScene;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -19,8 +22,11 @@ public partial class Gun : MeshInstance3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
-		if (Input.IsActionJustPressed("fire"))
+		if (Input.IsActionPressed("fire") && !onAttackCooldown)
 		{
+			onAttackCooldown = true;
+			attackCooldown.Start();
+
 			Bullet bullet = (Bullet)bulletScene.Instantiate();
 			bullet.pierce = bulletPierce;
 			bullet.damage = bulletDamage;
@@ -31,5 +37,10 @@ public partial class Gun : MeshInstance3D
 			bullet.Scale = new Vector3(1,1,1);
 			GetParent().GetParent().GetParent().AddChild(bullet);
 		}
+	}
+
+	private void OnAttackCooldownTimeout()
+	{
+		onAttackCooldown = false;
 	}
 }

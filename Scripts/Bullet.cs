@@ -28,12 +28,12 @@ public partial class Bullet : Node3D
 		{
 			pierce--;
 
+			enemy.health.TakeDamage(damage);
+
 			if (pierce <= 0)
 			{
 				QueueFree();
 			}
-
-			enemy.health.TakeDamage(damage);
 		}
 		else
 		{

@@ -8,8 +8,10 @@ public partial class Gun : MeshInstance3D
 	[Export] private int bulletPierce = 1,
 		bulletDamage = 1;
 
-	[Export] private float bulletSpeed = 10;
+	[Export] private float bulletSpeed = 10,
+		bulletAccuracy = .9f;
 	[Export] private Timer attackCooldown;
+	
 	private bool onAttackCooldown = false;
 
 	private PackedScene bulletScene;
@@ -32,6 +34,7 @@ public partial class Gun : MeshInstance3D
 			bullet.pierce = bulletPierce;
 			bullet.damage = bulletDamage;
 			bullet.speed = bulletSpeed;
+			bullet.accuracy = bulletAccuracy;
 
 			bullet.Position = bulletSpawn.GlobalPosition;
 			bullet.Basis = bulletSpawn.GlobalTransform.Basis;

@@ -20,7 +20,7 @@ bulletSpeed = 25.0
 attackCooldown = NodePath("AttackCooldown")
 
 [node name="bullet_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.758631, -6.63217e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.222468, 1.94487e-08)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="bullet_spawn"]
 visible = false

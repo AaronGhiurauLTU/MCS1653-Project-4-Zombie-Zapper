@@ -28,6 +28,7 @@
 
 3. **Any assets used that you didn't create yourself?** <br> (art, music, etc. Just tell us where you got it, link it here)
 
+Gas Station: https://www.turbosquid.com/3d-models/gas-station-interior-624727
 
 <br>
 

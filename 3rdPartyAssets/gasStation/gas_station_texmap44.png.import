@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dtenus6p1sg0p"
+path.s3tc="res://.godot/imported/gas_station_texmap44.png-a616ec1cb2c239253c72a84d5e3b9372.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "c25bb01c29beac0e2dc65fb9d871b0f5"
+}
+
+[deps]
+
+source_file="res://3rdPartyAssets/gasStation/gas_station_texmap44.png"
+dest_files=["res://.godot/imported/gas_station_texmap44.png-a616ec1cb2c239253c72a84d5e3b9372.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

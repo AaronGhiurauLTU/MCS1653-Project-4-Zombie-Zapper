@@ -40,7 +40,7 @@ public partial class Health : Node
 		if (GetParent() is not Player)
 		{
 			healthBar.Visible = false;
-			healthBar.Size = new Vector2(66 * (maxHealth / 3), healthBar.Size.Y);
+			healthBar.Size = new Vector2(100 * (maxHealth / 3), healthBar.Size.Y);
 			healthBar.Position = new Vector2(150 - (healthBar.Size.X / 2), healthBar.Position.Y);
 		}
 		healthBar.Value = 1;

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv14dftyhu0u5"]
+
+[ext_resource type="Script" path="res://Scripts/DoorInteract.cs" id="1_f2nh7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cfnry"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2l4hq"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_8wfk0"]
+
+[node name="DoorInteract" type="Node3D" node_paths=PackedStringArray("tpNode")]
+visible = false
+script = ExtResource("1_f2nh7")
+tpNode = NodePath("tpNode")
+
+[node name="Interactable" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.3, 0, 0, 0, 3, 0, 0, 0, 0.2, 0, 1.09935, 0)
+mesh = SubResource("BoxMesh_cfnry")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Interactable"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable/StaticBody3D"]
+shape = SubResource("BoxShape3D_2l4hq")
+
+[node name="tpNode" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0849402, 0.174089, 1.89866)
+mesh = SubResource("TorusMesh_8wfk0")
+skeleton = NodePath("../Interactable")

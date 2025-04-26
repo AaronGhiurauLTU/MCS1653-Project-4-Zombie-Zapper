@@ -10,6 +10,8 @@ public partial class Player : CharacterBody3D
 	[Export] private float cameraSensitivity = 0.05f;
 
 	[Export] public Health health;
+	[Export] private Label doorUseHint;
+	[Export] private RayCast3D interactCast;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
@@ -27,6 +29,18 @@ public partial class Player : CharacterBody3D
 	{
 
 	}
+
+	public void ChangeUseDoorHint(bool show)
+	{
+		if (show)
+		{
+			doorUseHint.Visible = true;
+		}
+		else
+		{
+			doorUseHint.Visible = false;
+		}
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
@@ -36,6 +50,8 @@ public partial class Player : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
+
+
 
 		if (Input.IsActionJustPressed("ui_cancel"))
 		{
@@ -49,6 +65,27 @@ public partial class Player : CharacterBody3D
 			}
 		}
 
+		if (interactCast.IsColliding())
+		{
+			if (((Node)interactCast.GetCollider()).GetParent().GetParent() is DoorInteract doorInteract)
+			{
+				ChangeUseDoorHint(true);
+				if (Input.IsActionJustPressed("interact") && doorUseHint.Visible)
+				{
+					GD.Print("door used!");
+					Position = doorInteract.tpNode.GlobalPosition;
+				}
+			}
+			else
+			{
+				ChangeUseDoorHint(false);
+			}
+		}
+		else
+		{
+			ChangeUseDoorHint(false);
+		}
+		
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");

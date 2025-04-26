@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=4 uid="uid://crtben0wguo60"]
+[gd_scene load_steps=132 format=4 uid="uid://crtben0wguo60"]
 
 [ext_resource type="PackedScene" uid="uid://tde5knwa1klm" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="PackedScene" uid="uid://dfiyr2tm4ioxs" path="res://Scenes/enemy.tscn" id="2_muvt3"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://nwnfbayk65bi" path="res://3rdPartyAssets/gasStation/gas_station_brick.jpg" id="59_883gf"]
 [ext_resource type="Texture2D" uid="uid://bqls7wdb6fcl7" path="res://3rdPartyAssets/gasStation/gas_station_lowResTile.jpg" id="60_2mwu1"]
 [ext_resource type="Texture2D" uid="uid://6kojuo4atdmg" path="res://3rdPartyAssets/gasStation/gas_station_texmap58.png" id="61_ip3if"]
+[ext_resource type="PackedScene" uid="uid://dv14dftyhu0u5" path="res://Scenes/DoorInteract.tscn" id="62_27mx8"]
 
 [sub_resource type="Shader" id="Shader_6tbh1"]
 code = "shader_type canvas_item;
@@ -1830,3 +1831,9 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/gas_station/StaticBody3D"]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_fywl0")
+
+[node name="DoorInteract" parent="." instance=ExtResource("62_27mx8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.89609, 0.242657, -19.7543)
+
+[node name="DoorInteract2" parent="." instance=ExtResource("62_27mx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9242, 0.176712, -20.0736)

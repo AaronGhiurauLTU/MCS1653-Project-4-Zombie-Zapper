@@ -16,7 +16,26 @@ public partial class Bullet : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Position += (float)delta * speed * -1 * (GlobalTransform.Basis.Y + (0.25f * offset));
+		Vector3 velocity = speed * -1 * (GlobalTransform.Basis.Y + (0.25f * offset));
+
+		// to avoid bullets tunneling through objects, create a raycast to where the bullet will move to and check if it hits something	
+		Vector3 from = GlobalTransform.Origin;
+		Vector3 to = from + velocity * (float)delta;
+		var spaceState = GetWorld3D().DirectSpaceState;
+		var space_state = GetWorld3D().DirectSpaceState;
+		var query = PhysicsRayQueryParameters3D.Create(from, to,
+            1);
+        var result = spaceState.IntersectRay(query);
+
+		GlobalPosition = to;
+
+		if (result.Count > 0)
+		{   
+			var collider = result["collider"];
+			var colliderObject = (Node3D)collider; // or whatever class you're expecting
+
+			OnBodyEntered(colliderObject);
+		}
 	}
 
 	private void OnTimeout()

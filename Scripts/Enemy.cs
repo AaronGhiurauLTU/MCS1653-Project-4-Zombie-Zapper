@@ -11,13 +11,16 @@ public partial class Enemy : CharacterBody3D
 	[Export] private Timer attackCooldown;
 	private bool setup = false;
 	private Player playerBeingAttacked;
+	private GasStation gasStation;
 
-	private bool onAttackCooldown = false;
+	private bool onAttackCooldown = false,
+		attackingShop = false;
 
 	public override void _Ready()
 	{
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
+		gasStation = GetParent().GetNode<GasStation>("GasStation");
 	}
 
 	private void OnHealthDepleted()
@@ -53,7 +56,7 @@ public partial class Enemy : CharacterBody3D
 
 		MoveAndSlide();
 
-		if (playerBeingAttacked != null)
+		if (playerBeingAttacked != null || attackingShop)
 			Attack();
 	}
 
@@ -64,6 +67,11 @@ public partial class Enemy : CharacterBody3D
 			playerBeingAttacked = player;
 			Attack();
 		}
+		else if (body.GetParent().GetParent() is GasStation gasStation)
+		{
+			attackingShop = true;
+			Attack();
+		}
 	}
 
 	private void OnHurtBoxExited(Node3D body)
@@ -72,18 +80,29 @@ public partial class Enemy : CharacterBody3D
 		{
 			playerBeingAttacked = null;
 		}
+		else if (body.GetParent().GetParent() is GasStation gasStation)
+		{
+			attackingShop = false;
+		}
 	}
 
 	private void Attack()
 	{
-		if (playerBeingAttacked == null || onAttackCooldown)
+		if ((playerBeingAttacked == null && attackingShop == false) || onAttackCooldown)
 			return;
 		
 		onAttackCooldown = true;
 
 		attackCooldown.Start();
 		
-		playerBeingAttacked.health.TakeDamage(damage);
+		if (playerBeingAttacked != null)
+		{
+			playerBeingAttacked.health.TakeDamage(damage);
+		}
+		else if (attackingShop)
+		{
+			gasStation.health.TakeDamage(damage);
+		}
 	}
 
 	private void OnAttackCooldownTimeout()

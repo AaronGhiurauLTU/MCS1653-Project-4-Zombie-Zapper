@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tde5knwa1klm"]
+[gd_scene load_steps=13 format=3 uid="uid://tde5knwa1klm"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="3_a2i75"]
@@ -10,14 +10,29 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_miu7r"]
 
+[sub_resource type="Gradient" id="Gradient_3xyu1"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kbxum"]
+gradient = SubResource("Gradient_3xyu1")
+
+[sub_resource type="Gradient" id="Gradient_0i5k0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.607843, 0.533333, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k2x47"]
+gradient = SubResource("Gradient_0i5k0")
+
 [sub_resource type="LabelSettings" id="LabelSettings_60f05"]
 font_size = 64
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "doorUseHint", "interactCast")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "interactCast")]
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
 health = NodePath("Health")
+storeHealthBar = NodePath("Control/StoreHealthBar")
 doorUseHint = NodePath("Control/DoorUseHint")
 interactCast = NodePath("Camera3D/InteractCast")
 
@@ -56,6 +71,20 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 306.0
 offset_bottom = 16.0
+
+[node name="StoreHealthBar" type="TextureProgressBar" parent="Control"]
+z_index = 11
+layout_mode = 0
+offset_top = 31.0
+offset_right = 306.0
+offset_bottom = 47.0
+max_value = 1.0
+step = 0.01
+value = 0.5
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_kbxum")
+texture_progress = SubResource("GradientTexture2D_k2x47")
+tint_over = Color(1, 1, 1, 0)
 
 [node name="crosshair" type="Sprite2D" parent="Control"]
 top_level = true

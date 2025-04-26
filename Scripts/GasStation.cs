@@ -1,0 +1,31 @@
+using Godot;
+using System;
+
+public partial class GasStation : Node3D
+{	
+	[Export] public Health health;
+	[Export] public Player player;
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		health.healthBar = player.storeHealthBar;
+		player.storeHealthBar.Value = 1;
+		health.HealthDepleted += OnHealthDepleted;
+		health.HealthChanged += OnHealthChanged;
+	}
+
+	private void OnHealthDepleted()
+	{
+		GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
+	}
+
+	private void OnHealthChanged(int newHealth)
+	{
+
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+}

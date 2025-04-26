@@ -4,7 +4,7 @@ using System;
 public partial class Health : Node
 {
 	[Export] private int maxHealth = 5;
-	[Export] private TextureProgressBar healthBar;
+	[Export] public TextureProgressBar healthBar;
 	private int currentHealth;
 	private AudioStreamPlayer2D hitSound;
 	// get the current health without allowing the setting of it publicly
@@ -37,13 +37,15 @@ public partial class Health : Node
 	{
 		currentHealth = maxHealth;
 
-		if (GetParent() is not Player)
+		if (GetParent() is Enemy)
 		{
 			healthBar.Visible = false;
 			healthBar.Size = new Vector2(100 * (maxHealth / 3), healthBar.Size.Y);
 			healthBar.Position = new Vector2(150 - (healthBar.Size.X / 2), healthBar.Position.Y);
 		}
-		healthBar.Value = 1;
+
+		if (healthBar != null)
+			healthBar.Value = 1;
 
 		//hitSound = GetNode<AudioStreamPlayer2D>("HitSound");
 	}

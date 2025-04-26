@@ -10,6 +10,7 @@ public partial class Player : CharacterBody3D
 	[Export] private float cameraSensitivity = 0.05f;
 
 	[Export] public Health health;
+	[Export] public TextureProgressBar storeHealthBar;
 	[Export] private Label doorUseHint;
 	[Export] private RayCast3D interactCast;
 	private Vector2 mouseLook = Vector2.Zero;
@@ -72,7 +73,6 @@ public partial class Player : CharacterBody3D
 				ChangeUseDoorHint(true);
 				if (Input.IsActionJustPressed("interact") && doorUseHint.Visible)
 				{
-					GD.Print("door used!");
 					Position = doorInteract.tpNode.GlobalPosition;
 				}
 			}

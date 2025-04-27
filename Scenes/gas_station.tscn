@@ -1429,3 +1429,4 @@ transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_wsrw0")
 
 [node name="Health" parent="." instance=ExtResource("60_bs1lp")]
+maxHealth = 10

@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Bullet : Node3D
 {
 	public int pierce = 1, damage = 1;
 	public float speed = 10, accuracy = .1f;
 	private Vector3 offset;
+	private HashSet<Enemy> enemiesHit = new();
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -47,6 +49,10 @@ public partial class Bullet : Node3D
 	{
 		if (body is Enemy enemy)
 		{
+			if (enemiesHit.Contains(enemy))
+				return;
+				
+			enemiesHit.Add(enemy);
 			pierce--;
 
 			enemy.health.TakeDamage(damage);

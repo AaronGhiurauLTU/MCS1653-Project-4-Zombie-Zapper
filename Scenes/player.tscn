@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://tde5knwa1klm"]
+[gd_scene load_steps=14 format=3 uid="uid://tde5knwa1klm"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="3_a2i75"]
+[ext_resource type="PackedScene" uid="uid://vqorq3wa0my5" path="res://Scenes/gun2.tscn" id="3_ax446"]
 [ext_resource type="PackedScene" uid="uid://bi3f53swbp2sh" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
 [ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Scenes/ZZ-crosshair.png" id="5_nebee"]
@@ -27,7 +28,7 @@ gradient = SubResource("Gradient_0i5k0")
 [sub_resource type="LabelSettings" id="LabelSettings_60f05"]
 font_size = 64
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "interactCast")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "interactCast", "gun1", "gun2")]
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
@@ -35,6 +36,8 @@ health = NodePath("Health")
 storeHealthBar = NodePath("Control/StoreHealthBar")
 doorUseHint = NodePath("Control/DoorUseHint")
 interactCast = NodePath("Camera3D/InteractCast")
+gun1 = NodePath("Camera3D/gunPosition/gun")
+gun2 = NodePath("Camera3D/gunPosition/gun2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_w3crd")
@@ -48,6 +51,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174002, -0.229714, -0.46921
 
 [node name="gun" parent="Camera3D/gunPosition" instance=ExtResource("3_ko6w2")]
 transform = Transform3D(0.5, 0, 0, 0, -0.5, 0, 0, 0, -0.5, 0, 0, 0)
+
+[node name="gun2" parent="Camera3D/gunPosition" instance=ExtResource("3_ax446")]
+transform = Transform3D(0.21882, 0.447203, -0.046127, 0.441379, -0.223448, -0.0724957, -0.0854545, -0.00899199, -0.492561, 0, 0, 0)
+visible = false
 
 [node name="InteractCast" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -2)

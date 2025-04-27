@@ -13,6 +13,7 @@ public partial class Player : CharacterBody3D
 	[Export] public TextureProgressBar storeHealthBar;
 	[Export] private Label doorUseHint;
 	[Export] private RayCast3D interactCast;
+	[Export] private Gun gun1, gun2;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
@@ -65,10 +66,21 @@ public partial class Player : CharacterBody3D
 				Input.MouseMode = Input.MouseModeEnum.Captured;
 			}
 		}
+		else if (Input.IsActionJustPressed("gun1"))
+		{
+			gun1.Visible = true;
+			gun2.Visible = false;
+		}
+		else if (Input.IsActionJustPressed("gun2"))
+		{
+			gun1.Visible = false;
+			gun2.Visible = true;
+		}
 
 		if (interactCast.IsColliding())
 		{
-			if (((Node)interactCast.GetCollider()).GetParent().GetParent() is DoorInteract doorInteract)
+			if ((Node)interactCast.GetCollider() != null && ((Node)interactCast.GetCollider()).GetParent() is Node 
+				&& ((Node)interactCast.GetCollider()).GetParent().GetParent() is DoorInteract doorInteract)
 			{
 				ChangeUseDoorHint(true);
 				if (Input.IsActionJustPressed("interact") && doorUseHint.Visible)

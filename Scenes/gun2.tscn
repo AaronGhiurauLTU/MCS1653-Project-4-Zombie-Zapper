@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi3f53swbp2sh"]
+[gd_scene load_steps=8 format=3 uid="uid://vqorq3wa0my5"]
 
-[ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_vf6t7"]
+[ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_s8dkb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y2wnb"]
 radius = 0.0005
@@ -13,17 +13,23 @@ albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xyn8f"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ed4b"]
+albedo_color = Color(0.333333, 1, 1, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_n3kgf"]
+material = SubResource("StandardMaterial3D_5ed4b")
 
 [node name="gun" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn", "attackCooldown")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_y2wnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
-script = ExtResource("1_vf6t7")
+script = ExtResource("1_s8dkb")
 bulletSpawn = NodePath("bullet_spawn")
 bulletScenePath = "res://Scenes/bullet.tscn"
-bulletPierce = 2
-bulletSpeed = 25.0
+bulletPierce = 4
+bulletDamage = 3
+bulletSpeed = 40.0
+bulletAccuracy = 0.97
 attackCooldown = NodePath("AttackCooldown")
 
 [node name="bullet_spawn" type="Node3D" parent="."]
@@ -35,7 +41,6 @@ visible = false
 mesh = SubResource("BoxMesh_50jlm")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, -4.37114e-08, 0.25, 0, -1, -1.09278e-08, 0, 0, 0)

@@ -4,7 +4,7 @@ using System;
 public partial class Enemy : CharacterBody3D
 {
 	[Export] private float speed = 2, accel = 18;
-	[Export] private Node3D target;
+	private Node3D target;
 	[Export] private NavigationAgent3D agent;
 	[Export] private int damage = 1;
 	[Export] public Health health;
@@ -20,7 +20,8 @@ public partial class Enemy : CharacterBody3D
 	{
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
-		gasStation = GetParent().GetNode<GasStation>("GasStation");
+		gasStation = GetParent().GetParent().GetNode<GasStation>("GasStation");
+		target = GetParent().GetParent().GetNode<Node3D>("Player");
 	}
 
 	private void OnHealthDepleted()

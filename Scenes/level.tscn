@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://crtben0wguo60"]
+[gd_scene load_steps=11 format=3 uid="uid://crtben0wguo60"]
 
 [ext_resource type="PackedScene" uid="uid://tde5knwa1klm" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="PackedScene" uid="uid://dfiyr2tm4ioxs" path="res://Scenes/enemy.tscn" id="2_muvt3"]
 [ext_resource type="PackedScene" uid="uid://b0drx7lfq584l" path="res://Scenes/gas_station.tscn" id="3_abyuf"]
+[ext_resource type="PackedScene" uid="uid://j5r3dam2r0v5" path="res://Scenes/spawner.tscn" id="5_rwrw7"]
 [ext_resource type="PackedScene" uid="uid://dv14dftyhu0u5" path="res://Scenes/DoorInteract.tscn" id="62_27mx8"]
 
 [sub_resource type="Shader" id="Shader_6tbh1"]
@@ -29,29 +30,22 @@ shader_parameter/pixel_size = 8
 shader_parameter/screen_size = Vector2(1920, 1080)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6xlou"]
-vertices = PackedVector3Array(11.25, 0.5, 6, 11.25, 0.5, 7.5, 19, 0.5, 7.25, -19, 0.5, 8, -11, 0.5, 8, -11, 0.5, 6, 10.5, 0.5, 5.25, 19, 0.5, -19, -10.25, 0.5, 5.25, -19, 0.5, -19, -9, 10.5, 7.25, -9, 10.5, 25.25, 9, 10.5, 25.25, 9, 10.5, 7.25, 11.25, 0.5, 19, 19, 0.5, 19, -8.75, 0.5, 7.5, -8.75, 0.5, 19, 9, 0.5, 19, 9, 0.5, 7.5, -19, 0.5, 19, -11, 0.5, 19)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(0, 6, 2), PackedInt32Array(2, 6, 7), PackedInt32Array(5, 3, 8), PackedInt32Array(8, 3, 9), PackedInt32Array(6, 8, 7), PackedInt32Array(7, 8, 9), PackedInt32Array(13, 12, 10), PackedInt32Array(10, 12, 11), PackedInt32Array(14, 1, 15), PackedInt32Array(15, 1, 2), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(21, 20, 4), PackedInt32Array(4, 20, 3)]
+vertices = PackedVector3Array(-19, 0.5, -20.8493, -19, 0.5, 70.6507, 19, 0.5, 70.6507, 19, 0.5, -20.8493)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 agent_radius = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_s7oo3"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_eksll"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_bh0ax"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_b8s8d"]
-
 [node name="Level" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.855333, -0.44339, 0.267974, -0.508991, -0.815639, 0.275065, 0.0966089, -0.371669, -0.923325, 0, 4.35185, 0)
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_muvt3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.674, 1, 13.934)
-target = NodePath("../Player")
-
 [node name="Player" parent="." instance=ExtResource("1_ax62n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6993, 1.49708, 9.53345)
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15685, 1.10534, -17.1472)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -76,7 +70,7 @@ mouse_filter = 1
 navigation_mesh = SubResource("NavigationMesh_6xlou")
 
 [node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D"]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 46.7649, 0, 0, 24.9156)
 mesh = SubResource("PlaneMesh_s7oo3")
 skeleton = NodePath("../..")
 
@@ -84,16 +78,6 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_eksll")
-
-[node name="Floor2" type="MeshInstance3D" parent="NavigationRegion3D"]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 16.275)
-mesh = SubResource("BoxMesh_bh0ax")
-skeleton = NodePath("../..")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor2/StaticBody3D"]
-shape = SubResource("BoxShape3D_b8s8d")
 
 [node name="GasStation" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_abyuf")]
 unique_name_in_owner = true
@@ -105,3 +89,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.4398
 
 [node name="DoorInteract2" parent="." instance=ExtResource("62_27mx8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41176, 0.176712, -19.3029)
+
+[node name="Spawner" parent="." instance=ExtResource("5_rwrw7")]
+transform = Transform3D(23.9257, 0, 0, 0, 23.9257, 0, 0, 0, 23.9257, -0.335184, 0.79291, 67.9596)
+
+[node name="Enemy" parent="Spawner" instance=ExtResource("2_muvt3")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.5, 0, 0)

@@ -11,15 +11,22 @@ public partial class Player : CharacterBody3D
 
 	[Export] public Health health;
 	[Export] public TextureProgressBar storeHealthBar;
-	[Export] private Label doorUseHint;
+	[Export] private Label doorUseHint, ammoIndicator;
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
+
+	private Gun currentGun;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
+
+		gun1.BulletFired += OnBulletFired;
+		gun2.BulletFired += OnBulletFired;
+
+		SetGun(1);
 	}
 
 	private void OnHealthDepleted()
@@ -30,6 +37,11 @@ public partial class Player : CharacterBody3D
 	private void OnHealthChanged(int newHealth)
 	{
 
+	}
+
+	private void OnBulletFired(int currentAmmo, int maxAmmo)
+	{
+		ammoIndicator.Text = $"Ammo: {currentAmmo} / {maxAmmo}";
 	}
 
 	public void ChangeUseDoorHint(bool show)
@@ -43,6 +55,23 @@ public partial class Player : CharacterBody3D
 			doorUseHint.Visible = false;
 		}
 	}
+
+	private void SetGun(int number)
+	{
+		switch (number)
+		{
+			case 1:
+				currentGun = gun1;
+				gun2.Visible = false;
+				break;
+			case 2:
+				currentGun = gun2;
+				gun1.Visible = false;
+				break;
+		}
+
+		currentGun.Visible = true;
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
@@ -52,8 +81,6 @@ public partial class Player : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-
-
 
 		if (Input.IsActionJustPressed("ui_cancel"))
 		{
@@ -68,13 +95,11 @@ public partial class Player : CharacterBody3D
 		}
 		else if (Input.IsActionJustPressed("gun1"))
 		{
-			gun1.Visible = true;
-			gun2.Visible = false;
+			SetGun(1);
 		}
 		else if (Input.IsActionJustPressed("gun2"))
 		{
-			gun1.Visible = false;
-			gun2.Visible = true;
+			SetGun(2);
 		}
 
 		if (interactCast.IsColliding())

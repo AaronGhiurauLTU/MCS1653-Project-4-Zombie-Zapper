@@ -28,6 +28,7 @@ bulletSpawn = NodePath("bullet_spawn")
 bulletScenePath = "res://Scenes/bullet.tscn"
 bulletPierce = 4
 bulletDamage = 3
+maxAmmo = 40
 bulletSpeed = 40.0
 bulletAccuracy = 0.97
 attackCooldown = NodePath("AttackCooldown")

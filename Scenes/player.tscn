@@ -26,7 +26,7 @@ colors = PackedColorArray(0.607843, 0.533333, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_k2x47"]
 gradient = SubResource("Gradient_0i5k0")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "ammoIndicator", "interactCast", "gun1", "gun2")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "ammoIndicator", "moneyIndicator", "interactCast", "gun1", "gun2")]
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
@@ -34,6 +34,7 @@ health = NodePath("Health")
 storeHealthBar = NodePath("Control/StoreHealthBar")
 doorUseHint = NodePath("Control/DoorUseHint")
 ammoIndicator = NodePath("Control/AmmoIndicator")
+moneyIndicator = NodePath("Control/MoneyIndicator")
 interactCast = NodePath("Camera3D/InteractCast")
 gun1 = NodePath("Camera3D/gunPosition/gun")
 gun2 = NodePath("Camera3D/gunPosition/gun2")
@@ -124,5 +125,16 @@ offset_left = -482.0
 offset_top = -88.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Ammo: 100 / 100"
+text = "Ammo: 100/100"
+label_settings = ExtResource("7_peqgk")
+
+[node name="MoneyIndicator" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -88.0
+offset_right = 515.0
+grow_vertical = 0
+text = "Money: $0"
 label_settings = ExtResource("7_peqgk")

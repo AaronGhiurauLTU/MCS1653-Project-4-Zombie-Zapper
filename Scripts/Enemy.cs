@@ -4,9 +4,10 @@ using System;
 public partial class Enemy : CharacterBody3D
 {
 	[Export] private float speed = 2, accel = 18;
-	private Node3D target;
+	private Player target;
 	[Export] private NavigationAgent3D agent;
-	[Export] private int damage = 1;
+	[Export] private int damage = 1,
+		moneyDropped = 1;
 	[Export] public Health health;
 	[Export] private Timer attackCooldown;
 	private bool setup = false;
@@ -21,11 +22,12 @@ public partial class Enemy : CharacterBody3D
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
 		gasStation = GetParent().GetParent().GetNode<GasStation>("GasStation");
-		target = GetParent().GetParent().GetNode<Node3D>("Player");
+		target = GetParent().GetParent().GetNode<Player>("Player");
 	}
 
 	private void OnHealthDepleted()
 	{
+		target.ChangeMoney(moneyDropped);
 		QueueFree();
 	}
 

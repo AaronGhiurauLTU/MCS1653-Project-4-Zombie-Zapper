@@ -11,11 +11,13 @@ public partial class Player : CharacterBody3D
 
 	[Export] public Health health;
 	[Export] public TextureProgressBar storeHealthBar;
-	[Export] private Label doorUseHint, ammoIndicator;
+	[Export] private Label doorUseHint, ammoIndicator, moneyIndicator;
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
+	[Export] private int startingMoney = 0;
 
 	private Gun currentGun;
+	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;
 	public override void _Ready()
 	{
@@ -27,6 +29,8 @@ public partial class Player : CharacterBody3D
 		gun2.BulletFired += OnBulletFired;
 
 		SetGun(1);
+		currentMoney = 0;
+		ChangeMoney(startingMoney);
 	}
 
 	private void OnHealthDepleted()
@@ -41,7 +45,18 @@ public partial class Player : CharacterBody3D
 
 	private void OnBulletFired(int currentAmmo, int maxAmmo)
 	{
-		ammoIndicator.Text = $"Ammo: {currentAmmo} / {maxAmmo}";
+		ammoIndicator.Text = $"Ammo: {currentAmmo}/{maxAmmo}";
+	}
+
+	public bool ChangeMoney(int change)
+	{
+		if (currentMoney + change < 0)
+			return false;
+		
+		currentMoney += change;
+		moneyIndicator.Text = $"Money: ${currentMoney}";
+		
+		return true;
 	}
 
 	public void ChangeUseDoorHint(bool show)

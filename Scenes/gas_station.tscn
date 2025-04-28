@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=4 uid="uid://b0drx7lfq584l"]
+[gd_scene load_steps=102 format=4 uid="uid://bu2h4ud8ecsm3"]
 
 [ext_resource type="Script" path="res://Scripts/GasStation.cs" id="1_02t8d"]
 [ext_resource type="Texture2D" uid="uid://0oteh07yknvg" path="res://3rdPartyAssets/gasStationNoPumps/gas_station_no_pumps_texmap11.png" id="1_aujys"]

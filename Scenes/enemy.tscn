@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfiyr2tm4ioxs"]
+[gd_scene load_steps=10 format=3 uid="uid://cqjqhcxm7puoj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_uqw5r"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="2_k0p3a"]

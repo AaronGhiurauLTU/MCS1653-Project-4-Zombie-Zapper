@@ -3,7 +3,7 @@ using System;
 
 public partial class Gun : MeshInstance3D
 {
-	[Signal] public delegate void BulletFiredEventHandler(int currentAmmo, int maxAmmo);
+	[Signal] public delegate void UpdateAmmoEventHandler(int currentAmmo, int maxAmmo);
 
 	[Export] private Node3D bulletSpawn;
 	[Export] private string bulletScenePath;
@@ -11,6 +11,7 @@ public partial class Gun : MeshInstance3D
 		bulletDamage = 1,
 		maxAmmo = 100;
 
+	public int MaxAmmo { get { return maxAmmo; } }
 	[Export] private float bulletSpeed = 10,
 		bulletAccuracy = .9f;
 	[Export] private Timer attackCooldown;
@@ -18,7 +19,17 @@ public partial class Gun : MeshInstance3D
 	private bool onAttackCooldown = false,
 		disabled = false;
 	private int currentAmmo;
+	public int CurrentAmmo { get { return currentAmmo; } }
 	private PackedScene bulletScene;
+
+	public void AddAmmo(int ammoChange)
+	{
+		currentAmmo += ammoChange;
+		currentAmmo = Math.Min(currentAmmo, maxAmmo);
+
+		EmitSignal(SignalName.UpdateAmmo, currentAmmo, maxAmmo);	
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -27,7 +38,7 @@ public partial class Gun : MeshInstance3D
 		currentAmmo = maxAmmo;
 
 		if (Visible)
-			EmitSignal(SignalName.BulletFired, currentAmmo, maxAmmo);	
+			EmitSignal(SignalName.UpdateAmmo, currentAmmo, maxAmmo);	
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,7 +52,7 @@ public partial class Gun : MeshInstance3D
 		else if (disabled)
 		{
 			disabled = false;
-			EmitSignal(SignalName.BulletFired, currentAmmo, maxAmmo);
+			EmitSignal(SignalName.UpdateAmmo, currentAmmo, maxAmmo);
 		}
 
 
@@ -49,7 +60,7 @@ public partial class Gun : MeshInstance3D
 		{
 			currentAmmo--;
 
-			EmitSignal(SignalName.BulletFired, currentAmmo, maxAmmo);
+			EmitSignal(SignalName.UpdateAmmo, currentAmmo, maxAmmo);
 
 			onAttackCooldown = true;
 			attackCooldown.Start();

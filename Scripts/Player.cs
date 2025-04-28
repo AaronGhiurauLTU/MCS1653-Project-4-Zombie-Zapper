@@ -11,7 +11,7 @@ public partial class Player : CharacterBody3D
 
 	[Export] public Health health;
 	[Export] public TextureProgressBar storeHealthBar;
-	[Export] private Label doorUseHint, ammoIndicator, moneyIndicator;
+	[Export] private Label doorUseHint, buyAmmoHint, ammoIndicator, moneyIndicator;
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
@@ -25,12 +25,14 @@ public partial class Player : CharacterBody3D
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
 
-		gun1.BulletFired += OnBulletFired;
-		gun2.BulletFired += OnBulletFired;
+		gun1.UpdateAmmo += OnBulletFired;
+		gun2.UpdateAmmo += OnBulletFired;
 
 		SetGun(1);
 		currentMoney = 0;
 		ChangeMoney(startingMoney);
+		ChangeUseDoorHint(false);
+		ChangeBuyAmmoHint(false);
 	}
 
 	private void OnHealthDepleted()
@@ -68,6 +70,18 @@ public partial class Player : CharacterBody3D
 		else
 		{
 			doorUseHint.Visible = false;
+		}
+	}
+
+	public void ChangeBuyAmmoHint(bool show)
+	{
+		if (show)
+		{
+			buyAmmoHint.Visible = true;
+		}
+		else
+		{
+			buyAmmoHint.Visible = false;
 		}
 	}
 
@@ -119,23 +133,43 @@ public partial class Player : CharacterBody3D
 
 		if (interactCast.IsColliding())
 		{
-			if ((Node)interactCast.GetCollider() != null && ((Node)interactCast.GetCollider()).GetParent() is Node 
-				&& ((Node)interactCast.GetCollider()).GetParent().GetParent() is DoorInteract doorInteract)
+			if ((Node)interactCast.GetCollider() != null && ((Node)interactCast.GetCollider()).GetParent() is Node)
 			{
-				ChangeUseDoorHint(true);
-				if (Input.IsActionJustPressed("interact") && doorUseHint.Visible)
+				if (((Node)interactCast.GetCollider()).GetParent().GetParent() is DoorInteract doorInteract)
 				{
-					Position = doorInteract.tpNode.GlobalPosition;
+					ChangeUseDoorHint(true);
+					if (Input.IsActionJustPressed("interact") && doorUseHint.Visible)
+					{
+						Position = doorInteract.tpNode.GlobalPosition;
+					}
+				}
+				else if (((Node)interactCast.GetCollider()).GetParent().GetParent() is AmmoInteract ammoInteract)
+				{
+					ChangeBuyAmmoHint(true);
+					if (Input.IsActionJustPressed("interact") && buyAmmoHint.Visible
+					 && ((ammoInteract.gunType == 1 && currentGun == gun1) || (ammoInteract.gunType == 2 && currentGun == gun2))
+					 && (currentGun.CurrentAmmo < currentGun.MaxAmmo)
+					 && ChangeMoney(ammoInteract.cost))
+					{
+						currentGun.AddAmmo(ammoInteract.ammoAmount);
+					}
+				}
+				else
+				{
+					ChangeUseDoorHint(false);
+					ChangeBuyAmmoHint(false);
 				}
 			}
 			else
 			{
 				ChangeUseDoorHint(false);
+				ChangeBuyAmmoHint(false);
 			}
 		}
 		else
 		{
 			ChangeUseDoorHint(false);
+			ChangeBuyAmmoHint(false);
 		}
 		
 		// Get the input direction and handle the movement/deceleration.

@@ -26,7 +26,7 @@ colors = PackedColorArray(0.607843, 0.533333, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_k2x47"]
 gradient = SubResource("Gradient_0i5k0")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "buyAmmoHint", "ammoIndicator", "moneyIndicator", "interactCast", "gun1", "gun2")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "buyAmmoHint", "ammoIndicator", "moneyIndicator", "buyHealthHint", "interactCast", "gun1", "gun2")]
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
@@ -36,6 +36,7 @@ doorUseHint = NodePath("Control/DoorUseHint")
 buyAmmoHint = NodePath("Control/BuyAmmoHint")
 ammoIndicator = NodePath("Control/AmmoIndicator")
 moneyIndicator = NodePath("Control/MoneyIndicator")
+buyHealthHint = NodePath("Control/BuyHealthHint")
 interactCast = NodePath("Camera3D/InteractCast")
 gun1 = NodePath("Camera3D/gunPosition/gun")
 gun2 = NodePath("Camera3D/gunPosition/gun2")
@@ -129,6 +130,22 @@ offset_bottom = -148.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Press F to buy ammo"
+label_settings = ExtResource("7_peqgk")
+
+[node name="BuyHealthHint" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -292.0
+offset_top = -236.0
+offset_right = 293.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press F to purchase heal"
 label_settings = ExtResource("7_peqgk")
 
 [node name="AmmoIndicator" type="Label" parent="Control"]

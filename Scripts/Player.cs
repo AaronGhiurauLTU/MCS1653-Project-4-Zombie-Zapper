@@ -11,7 +11,7 @@ public partial class Player : CharacterBody3D
 
 	[Export] public Health health;
 	[Export] public TextureProgressBar storeHealthBar;
-	[Export] private Label doorUseHint, buyAmmoHint, ammoIndicator, moneyIndicator;
+	[Export] private Label doorUseHint, buyAmmoHint, ammoIndicator, moneyIndicator, buyHealthHint;
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
@@ -19,6 +19,7 @@ public partial class Player : CharacterBody3D
 	private Gun currentGun;
 	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;
+	private GasStation store;
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -33,6 +34,9 @@ public partial class Player : CharacterBody3D
 		ChangeMoney(startingMoney);
 		ChangeUseDoorHint(false);
 		ChangeBuyAmmoHint(false);
+		ChangeBuyHealthHint(false);
+
+		store = GetParent().GetNode<GasStation>("GasStation");
 	}
 
 	private void OnHealthDepleted()
@@ -82,6 +86,18 @@ public partial class Player : CharacterBody3D
 		else
 		{
 			buyAmmoHint.Visible = false;
+		}
+	}
+
+	public void ChangeBuyHealthHint(bool show)
+	{
+		if (show)
+		{
+			buyHealthHint.Visible = true;
+		}
+		else
+		{
+			buyHealthHint.Visible = false;
 		}
 	}
 
@@ -154,22 +170,43 @@ public partial class Player : CharacterBody3D
 						currentGun.AddAmmo(ammoInteract.ammoAmount);
 					}
 				}
+				else if (((Node)interactCast.GetCollider()).GetParent().GetParent() is HealthInteract healthInteract)
+				{
+					ChangeBuyHealthHint(true);
+					if (Input.IsActionJustPressed("interact") && buyHealthHint.Visible
+					 && ((healthInteract.type == HealthInteract.HPType.store && store.health.CurrentHealth < store.health.MaxHealth) 
+					 	|| (healthInteract.type == HealthInteract.HPType.player && health.CurrentHealth < health.MaxHealth))
+					 && ChangeMoney(healthInteract.cost))
+					{
+						if (healthInteract.type == HealthInteract.HPType.store)
+						{
+							store.health.AddHealth(healthInteract.ammount);
+						}
+						else if (healthInteract.type == HealthInteract.HPType.player)
+						{
+							health.AddHealth(healthInteract.ammount);
+						}
+					}
+				}
 				else
 				{
 					ChangeUseDoorHint(false);
 					ChangeBuyAmmoHint(false);
+					ChangeBuyHealthHint(false);
 				}
 			}
 			else
 			{
 				ChangeUseDoorHint(false);
 				ChangeBuyAmmoHint(false);
+				ChangeBuyHealthHint(false);
 			}
 		}
 		else
 		{
 			ChangeUseDoorHint(false);
 			ChangeBuyAmmoHint(false);
+			ChangeBuyHealthHint(false);
 		}
 		
 		// Get the input direction and handle the movement/deceleration.

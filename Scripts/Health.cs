@@ -9,7 +9,7 @@ public partial class Health : Node
 	private AudioStreamPlayer2D hitSound;
 	// get the current health without allowing the setting of it publicly
 	public int CurrentHealth { get { return currentHealth; } }
-
+	public int MaxHealth { get { return maxHealth; } }
 	// custom signal to fire when health reaches 0
 	[Signal] public delegate void HealthDepletedEventHandler();
 
@@ -32,6 +32,20 @@ public partial class Health : Node
 			EmitSignal(SignalName.HealthDepleted);
 		}
 	}
+
+	public void AddHealth(int healthChange)
+	{
+		currentHealth += healthChange;
+
+		// keep health from going below 0
+		currentHealth = Math.Min(maxHealth, currentHealth);
+
+		EmitSignal(SignalName.HealthChanged, currentHealth);
+
+		healthBar.Visible = true;
+		healthBar.Value = (float)currentHealth / maxHealth;	
+	}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

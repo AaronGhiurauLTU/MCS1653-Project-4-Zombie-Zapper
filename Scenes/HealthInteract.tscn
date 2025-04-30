@@ -47,5 +47,5 @@ grow_vertical = 2
 size_flags_horizontal = 4
 text = "Health Type: player
 Cost: $10
-Ammount Healed: 5"
+Amount Healed: 5"
 horizontal_alignment = 1

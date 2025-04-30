@@ -13,7 +13,7 @@ public partial class HealthInteract : Node3D
 	[Export] public Label information;
 	public override void _Ready()
 	{
-		information.Text = $"Health Type: {type}\nCost: ${-1 * cost}\nAmmount Healed: {ammount}";
+		information.Text = $"Health Type: {type}\nCost: ${-1 * cost}\nAmount Healed: {ammount}";
 	}
 
 }

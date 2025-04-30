@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://crrrfg7gvalr7" path="res://Scenes/HealthInteract.tscn" id="7_81jl5"]
 [ext_resource type="PackedScene" uid="uid://3yt6wb80y6ij" path="res://Scenes/DoorInteract.tscn" id="62_27mx8"]
 
-[sub_resource type="Shader" id="Shader_6tbh1"]
+[sub_resource type="Shader" id="Shader_sbwyd"]
 code = "shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
@@ -27,8 +27,8 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b8d8i"]
-shader = SubResource("Shader_6tbh1")
-shader_parameter/pixel_size = 8
+shader = SubResource("Shader_sbwyd")
+shader_parameter/pixel_size = 6
 shader_parameter/screen_size = Vector2(1920, 1080)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6xlou"]
@@ -47,7 +47,7 @@ transform = Transform3D(0.855333, -0.44339, 0.267974, -0.508991, -0.815639, 0.27
 
 [node name="Player" parent="." instance=ExtResource("1_ax62n")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.15685, 1.10534, -17.1472)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.15685, 1.10534, -17.1472)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -109,8 +109,10 @@ gunType = 2
 
 [node name="HealthInteract" parent="." instance=ExtResource("7_81jl5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.382343, 1.04693, -24.4604)
+ammount = 8
 
 [node name="HealthInteract2" parent="." instance=ExtResource("7_81jl5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.383673, 1.04693, -21.1161)
 cost = -15
+ammount = 15
 type = 0

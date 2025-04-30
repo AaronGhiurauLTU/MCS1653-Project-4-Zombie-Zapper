@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://btp8f0awk2fyg" path="res://Scenes/gun2.tscn" id="3_ax446"]
 [ext_resource type="PackedScene" uid="uid://ccktrj5rvhgi6" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
-[ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Scenes/ZZ-crosshair.png" id="5_nebee"]
+[ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Sprites/ZZ-crosshair.png" id="5_nebee"]
 [ext_resource type="LabelSettings" uid="uid://caykdyumvr0c" path="res://Fonts/UI.tres" id="7_peqgk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
@@ -30,6 +30,7 @@ gradient = SubResource("Gradient_0i5k0")
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
+cameraSensitivity = 0.1
 health = NodePath("Health")
 storeHealthBar = NodePath("Control/StoreHealthBar")
 doorUseHint = NodePath("Control/DoorUseHint")
@@ -66,6 +67,7 @@ collision_mask = 33
 mesh = SubResource("CapsuleMesh_miu7r")
 
 [node name="Health" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("3_a2i75")]
+maxHealth = 8
 healthBar = NodePath("../Control/HealthBar")
 
 [node name="Control" type="Control" parent="."]

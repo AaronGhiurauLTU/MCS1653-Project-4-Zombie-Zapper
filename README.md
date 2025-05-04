@@ -29,6 +29,8 @@
 3. **Any assets used that you didn't create yourself?** <br> (art, music, etc. Just tell us where you got it, link it here)
 
 Gas Station: https://www.turbosquid.com/3d-models/gas-station-interior-624727
+Fast Firing Gun (Gun 1): https://www.turbosquid.com/3d-models/cartoony-laser-rifle-3d-model-1979586
+Slow Firing Gun (Gun 2): https://www.turbosquid.com/3d-models/3d-model-phantom-assault-weapon-1881502
 
 <br>
 

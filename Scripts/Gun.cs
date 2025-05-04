@@ -44,6 +44,9 @@ public partial class Gun : MeshInstance3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
+		if (Engine.TimeScale == 0)
+			return;
+
 		if (!Visible)
 		{
 			disabled = true;

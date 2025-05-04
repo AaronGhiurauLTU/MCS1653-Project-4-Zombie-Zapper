@@ -9,7 +9,8 @@ public partial class Menu : Control
 
 	public override void _Ready()
 	{
-		pixelationEffect.Visible = true;
+		if (pixelationEffect != null)
+			pixelationEffect.Visible = true;
 	}
 	public void ChangeLabelText(string newText)
 	{
@@ -29,6 +30,7 @@ public partial class Menu : Control
 	{
 		Engine.TimeScale = 1;
 		GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
+		GD.Print("Play pressed");
 		//GameManager.LoadLevel(1);
 	}
 

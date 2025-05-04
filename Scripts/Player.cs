@@ -15,7 +15,7 @@ public partial class Player : CharacterBody3D
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
-
+	[Export] public Control gameOverMenu;
 	private Gun currentGun;
 	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;
@@ -41,7 +41,10 @@ public partial class Player : CharacterBody3D
 
 	private void OnHealthDepleted()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
+		Engine.TimeScale = 0;
+		gameOverMenu.Visible = true;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		//GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
 	}
 
 	private void OnHealthChanged(int newHealth)
@@ -119,6 +122,9 @@ public partial class Player : CharacterBody3D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Engine.TimeScale == 0)
+			return;
+
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.

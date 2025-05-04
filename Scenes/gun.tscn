@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccktrj5rvhgi6"]
+[gd_scene load_steps=8 format=3 uid="uid://ccktrj5rvhgi6"]
 
 [ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_vf6t7"]
+[ext_resource type="PackedScene" uid="uid://gf4vd4yy05p6" path="res://Scenes/gun_part_2(textured).tscn" id="2_bq3e2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y2wnb"]
 radius = 0.0005
@@ -39,10 +40,15 @@ wait_time = 0.2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, -4.37114e-08, 0.25, 0, -1, -1.09278e-08, 0, 0, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_xyn8f")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, 0.4, 0, -0.4, -1.74846e-08, 0, -2.18079e-08, 0.912748)
+visible = false
 mesh = SubResource("SphereMesh_n3kgf")
+
+[node name="Gun_Part_2(Textured)" parent="." instance=ExtResource("2_bq3e2")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.75, -0.633902, -2.77087e-08)
 
 [connection signal="timeout" from="AttackCooldown" to="." method="OnAttackCooldownTimeout"]

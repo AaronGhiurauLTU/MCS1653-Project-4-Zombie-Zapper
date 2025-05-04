@@ -44,6 +44,9 @@ public partial class Enemy : CharacterBody3D
 			setup = true;
 			return;
 		}
+
+		if (Engine.TimeScale == 0)
+			return;
 		
 		Vector3 direction = Vector3.Zero;
 

@@ -67,7 +67,7 @@ collision_mask = 33
 mesh = SubResource("CapsuleMesh_miu7r")
 
 [node name="Health" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("3_a2i75")]
-maxHealth = 8
+maxHealth = 1
 healthBar = NodePath("../Control/HealthBar")
 
 [node name="Control" type="Control" parent="."]

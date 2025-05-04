@@ -16,7 +16,9 @@ public partial class GasStation : Node3D
 
 	private void OnHealthDepleted()
 	{
-		GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
+		Engine.TimeScale = 0;
+		player.gameOverMenu.Visible = true;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
 	private void OnHealthChanged(int newHealth)

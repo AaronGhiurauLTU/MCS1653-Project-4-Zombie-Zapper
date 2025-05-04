@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://gf4vd4yy05p6"]
+
+[ext_resource type="PackedScene" uid="uid://b7x7g6un6tyji" path="res://3rdPartyAssets/Gun_Part_2(Textured).glb" id="1_3sqs1"]
+[ext_resource type="Material" uid="uid://btivjmhhnkv06" path="res://gun1mat.tres" id="2_huinl"]
+
+[node name="Gun_Part_2(Textured)" instance=ExtResource("1_3sqs1")]
+
+[node name="Textured Gun" parent="Gun Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_huinl")

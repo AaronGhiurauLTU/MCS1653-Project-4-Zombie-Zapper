@@ -22,13 +22,13 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rsi84"]
 shader = SubResource("Shader_6tbh1")
-shader_parameter/pixel_size = 6
+shader_parameter/pixel_size = 8
 shader_parameter/screen_size = Vector2(1920, 1080)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gwx30"]
 font_size = 128
 
-[node name="GameOverMenu" type="Control" node_paths=PackedStringArray("mainMenuContainer", "pixelationEffect")]
+[node name="GameOverMenu" type="Control" node_paths=PackedStringArray("mainMenuContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_a0mc2")
 mainMenuContainer = NodePath("VBoxContainer")
-pixelationEffect = NodePath("PixelationEffect")
 
 [node name="PixelationEffect" type="ColorRect" parent="."]
 visible = false

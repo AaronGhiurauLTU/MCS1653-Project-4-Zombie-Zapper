@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=13 format=3 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
-[ext_resource type="PackedScene" uid="uid://cqjqhcxm7puoj" path="res://Scenes/enemy.tscn" id="2_muvt3"]
 [ext_resource type="PackedScene" uid="uid://bu2h4ud8ecsm3" path="res://Scenes/gas_station.tscn" id="3_abyuf"]
 [ext_resource type="PackedScene" uid="uid://j5r3dam2r0v5" path="res://Scenes/spawner.tscn" id="5_rwrw7"]
 [ext_resource type="PackedScene" uid="uid://vdm3w25rnmv3" path="res://Scenes/AmmoInteract.tscn" id="6_y211j"]
@@ -29,7 +28,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b8d8i"]
 shader = SubResource("Shader_sbwyd")
-shader_parameter/pixel_size = 6
+shader_parameter/pixel_size = 8
 shader_parameter/screen_size = Vector2(1920, 1080)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6xlou"]
@@ -52,27 +51,22 @@ size = Vector2i(1920, 1080)
 [node name="Player" parent="." node_paths=PackedStringArray("gameOverMenu") instance=ExtResource("1_ax62n")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.15685, 1.10534, -17.1472)
-gameOverMenu = NodePath("../CanvasLayer")
+gameOverMenu = NodePath("../CanvasLayer/GameOverMenu")
 
-[node name="Control" type="Control" parent="."]
-z_index = 10
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PixelationEffect" type="ColorRect" parent="Control"]
+[node name="PixelationEffect" type="ColorRect" parent="CanvasLayer"]
+z_index = 2
 material = SubResource("ShaderMaterial_b8d8i")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("8_b833o")]
+visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_6xlou")
@@ -101,9 +95,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41176, 0.176712, -19.3029)
 [node name="Spawner" parent="." instance=ExtResource("5_rwrw7")]
 transform = Transform3D(23.9257, 0, 0, 0, 23.9257, 0, 0, 0, 23.9257, -0.335184, 0.79291, 67.9596)
 
-[node name="Enemy" parent="Spawner" instance=ExtResource("2_muvt3")]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0.5, 0, 0)
-
 [node name="AmmoInteract" parent="." instance=ExtResource("6_y211j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05734, 1.26414, -28.0417)
 
@@ -122,8 +113,3 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.3836
 cost = -15
 ammount = 15
 type = 0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("8_b833o")]

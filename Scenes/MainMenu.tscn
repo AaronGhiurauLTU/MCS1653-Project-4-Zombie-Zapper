@@ -22,7 +22,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuttu"]
 shader = SubResource("Shader_dukb1")
-shader_parameter/pixel_size = 6
+shader_parameter/pixel_size = 8
 shader_parameter/screen_size = Vector2(1920, 1080)
 
 [sub_resource type="LabelSettings" id="LabelSettings_gwx30"]

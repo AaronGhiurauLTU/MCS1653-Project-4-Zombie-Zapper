@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://buw275l0h5t87"
-path="res://.godot/imported/Phantom.glb-8c732f19964e525e7b6f41249b17f736.scn"
+path="res://.godot/imported/Phantom.glb-885854f75151d6917d5cadb299472235.scn"
 
 [deps]
 
-source_file="res://3rdPartyAssets/Phantom.glb"
-dest_files=["res://.godot/imported/Phantom.glb-8c732f19964e525e7b6f41249b17f736.scn"]
+source_file="res://3rdPartyAssets/gun2/Phantom.glb"
+dest_files=["res://.godot/imported/Phantom.glb-885854f75151d6917d5cadb299472235.scn"]
 
 [params]
 

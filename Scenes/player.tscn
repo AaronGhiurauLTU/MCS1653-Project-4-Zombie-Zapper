@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://btp8f0awk2fyg" path="res://Scenes/gun2.tscn" id="3_ax446"]
 [ext_resource type="PackedScene" uid="uid://ccktrj5rvhgi6" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
-[ext_resource type="Texture2D" uid="uid://do7nth183aur0" path="res://Sprites/ZZ-crosshair-6.png" id="6_xcadm"]
+[ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Sprites/ZZ-crosshair.png" id="6_gbtbj"]
 [ext_resource type="LabelSettings" uid="uid://caykdyumvr0c" path="res://Fonts/UI.tres" id="7_peqgk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
@@ -67,7 +67,7 @@ collision_mask = 33
 mesh = SubResource("CapsuleMesh_miu7r")
 
 [node name="Health" parent="." node_paths=PackedStringArray("healthBar") instance=ExtResource("3_a2i75")]
-maxHealth = 1
+maxHealth = 8
 healthBar = NodePath("../Control/HealthBar")
 
 [node name="Control" type="Control" parent="."]
@@ -98,9 +98,10 @@ texture_progress = SubResource("GradientTexture2D_k2x47")
 tint_over = Color(1, 1, 1, 0)
 
 [node name="crosshair" type="Sprite2D" parent="Control"]
+modulate = Color(1, 1, 1, 0.462745)
 top_level = true
 position = Vector2(960, 542)
-texture = ExtResource("6_xcadm")
+texture = ExtResource("6_gbtbj")
 
 [node name="DoorUseHint" type="Label" parent="Control"]
 layout_mode = 1

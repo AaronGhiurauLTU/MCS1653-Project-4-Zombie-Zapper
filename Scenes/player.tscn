@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://btp8f0awk2fyg" path="res://Scenes/gun2.tscn" id="3_ax446"]
 [ext_resource type="PackedScene" uid="uid://ccktrj5rvhgi6" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
-[ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Sprites/ZZ-crosshair.png" id="5_nebee"]
+[ext_resource type="Texture2D" uid="uid://do7nth183aur0" path="res://Sprites/ZZ-crosshair-6.png" id="6_xcadm"]
 [ext_resource type="LabelSettings" uid="uid://caykdyumvr0c" path="res://Fonts/UI.tres" id="7_peqgk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
@@ -100,7 +100,7 @@ tint_over = Color(1, 1, 1, 0)
 [node name="crosshair" type="Sprite2D" parent="Control"]
 top_level = true
 position = Vector2(960, 542)
-texture = ExtResource("5_nebee")
+texture = ExtResource("6_xcadm")
 
 [node name="DoorUseHint" type="Label" parent="Control"]
 layout_mode = 1

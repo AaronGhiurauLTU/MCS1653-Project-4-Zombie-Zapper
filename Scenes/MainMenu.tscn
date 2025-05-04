@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_rqjrl"]
 
-[sub_resource type="Shader" id="Shader_6tbh1"]
+[sub_resource type="Shader" id="Shader_dukb1"]
 code = "shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
@@ -21,7 +21,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xuttu"]
-shader = SubResource("Shader_6tbh1")
+shader = SubResource("Shader_dukb1")
 shader_parameter/pixel_size = 6
 shader_parameter/screen_size = Vector2(1920, 1080)
 

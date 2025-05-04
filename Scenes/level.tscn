@@ -1,16 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=14 format=3 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="PackedScene" uid="uid://cqjqhcxm7puoj" path="res://Scenes/enemy.tscn" id="2_muvt3"]
-[ext_resource type="Script" path="res://Scripts/Menu.cs" id="2_y2r0b"]
 [ext_resource type="PackedScene" uid="uid://bu2h4ud8ecsm3" path="res://Scenes/gas_station.tscn" id="3_abyuf"]
 [ext_resource type="PackedScene" uid="uid://j5r3dam2r0v5" path="res://Scenes/spawner.tscn" id="5_rwrw7"]
 [ext_resource type="PackedScene" uid="uid://vdm3w25rnmv3" path="res://Scenes/AmmoInteract.tscn" id="6_y211j"]
 [ext_resource type="PackedScene" uid="uid://crrrfg7gvalr7" path="res://Scenes/HealthInteract.tscn" id="7_81jl5"]
+[ext_resource type="PackedScene" uid="uid://jsvqubgthacx" path="res://Scenes/GameOverMenu.tscn" id="8_b833o"]
 [ext_resource type="PackedScene" uid="uid://3yt6wb80y6ij" path="res://Scenes/DoorInteract.tscn" id="62_27mx8"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_gwx30"]
-font_size = 128
 
 [sub_resource type="Shader" id="Shader_sbwyd"]
 code = "shader_type canvas_item;
@@ -52,57 +49,10 @@ transform = Transform3D(0.855333, -0.44339, 0.267974, -0.508991, -0.815639, 0.27
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)
 
-[node name="GameOverMenu" type="Control" parent="SubViewport" node_paths=PackedStringArray("mainMenuContainer")]
-z_index = 9
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("2_y2r0b")
-mainMenuContainer = NodePath("VBoxContainer")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/GameOverMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="SubViewport/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-text = "Game Over"
-label_settings = SubResource("LabelSettings_gwx30")
-
-[node name="Play" type="Button" parent="SubViewport/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "Try Again"
-
-[node name="MainMenu" type="Button" parent="SubViewport/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "Main Menu
-"
-
-[node name="Quit" type="Button" parent="SubViewport/GameOverMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "Quit"
-
 [node name="Player" parent="." node_paths=PackedStringArray("gameOverMenu") instance=ExtResource("1_ax62n")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.15685, 1.10534, -17.1472)
-gameOverMenu = NodePath("../SubViewport/GameOverMenu")
+gameOverMenu = NodePath("../CanvasLayer")
 
 [node name="Control" type="Control" parent="."]
 z_index = 10
@@ -173,6 +123,7 @@ cost = -15
 ammount = 15
 type = 0
 
-[connection signal="pressed" from="SubViewport/GameOverMenu/VBoxContainer/Play" to="SubViewport/GameOverMenu" method="OnPlayPressed"]
-[connection signal="pressed" from="SubViewport/GameOverMenu/VBoxContainer/MainMenu" to="SubViewport/GameOverMenu" method="OnMainMenuPressed"]
-[connection signal="pressed" from="SubViewport/GameOverMenu/VBoxContainer/Quit" to="SubViewport/GameOverMenu" method="OnQuitPressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("8_b833o")]

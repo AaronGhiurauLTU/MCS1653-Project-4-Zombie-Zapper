@@ -15,7 +15,7 @@ public partial class Player : CharacterBody3D
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
-	[Export] public Control gameOverMenu;
+	[Export] public CanvasLayer gameOverMenu;
 	private Gun currentGun;
 	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;

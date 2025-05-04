@@ -41,7 +41,7 @@ public partial class Menu : Control
 	private void OnMainMenuPressed()
 	{
 		Engine.TimeScale = 1;
-		GetTree().ChangeSceneToFile("res://Scenes/mainmenu.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/MainMenu.tscn");
 	}
 
 	private void OnQuitPressed()

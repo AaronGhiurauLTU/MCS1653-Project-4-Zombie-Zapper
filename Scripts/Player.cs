@@ -15,8 +15,7 @@ public partial class Player : CharacterBody3D
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
-	[Export] public Control gameOverMenu;
-	[Export] private ColorRect pixelationEffect;
+	[Export] public Control gameOverMenu, gameWonMenu;
 	private Gun currentGun;
 	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;
@@ -126,6 +125,14 @@ public partial class Player : CharacterBody3D
 	{
 		if (Engine.TimeScale == 0)
 			return;
+
+		if (Spawner.finishedSpawning && Spawner.enemiesAlive <= 0)
+		{
+			Engine.TimeScale = 0;
+
+			gameWonMenu.Visible = true;
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
 
 		Vector3 velocity = Velocity;
 

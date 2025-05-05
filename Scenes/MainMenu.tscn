@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bscpv3rhk0u72"]
+[gd_scene load_steps=8 format=3 uid="uid://bscpv3rhk0u72"]
 
 [ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_rqjrl"]
+[ext_resource type="Texture2D" uid="uid://cqf4mww0duw6a" path="res://Sprites/2025-05-04T23:45:38,478597012-04:00.png" id="2_qaqt5"]
 
 [sub_resource type="Shader" id="Shader_dukb1"]
 code = "shader_type canvas_item;
@@ -28,6 +29,12 @@ shader_parameter/screen_size = Vector2(1920, 1080)
 [sub_resource type="LabelSettings" id="LabelSettings_gwx30"]
 font_size = 128
 
+[sub_resource type="LabelSettings" id="LabelSettings_bfw1c"]
+font_size = 80
+
+[sub_resource type="LabelSettings" id="LabelSettings_m71kj"]
+font_size = 80
+
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("instructionsContainer", "mainMenuContainer", "creditsContainer", "pixelationEffect")]
 layout_mode = 3
 anchors_preset = 15
@@ -40,6 +47,11 @@ instructionsContainer = NodePath("InstructionsContainer")
 mainMenuContainer = NodePath("VBoxContainer")
 creditsContainer = NodePath("CreditsContainer")
 pixelationEffect = NodePath("PixelationEffect")
+
+[node name="2025-05-04t23_45_38,478597012-04_00" type="Sprite2D" parent="."]
+position = Vector2(1068, 540)
+scale = Vector2(1.42978, 1.42978)
+texture = ExtResource("2_qaqt5")
 
 [node name="PixelationEffect" type="ColorRect" parent="."]
 visible = false
@@ -54,6 +66,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -74,27 +87,26 @@ label_settings = SubResource("LabelSettings_gwx30")
 
 [node name="Play" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Play"
 
 [node name="Instructions" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Instructions"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Credits
 "
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Quit"
 
 [node name="InstructionsContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -110,12 +122,19 @@ grow_vertical = 2
 
 [node name="Instructions" type="Label" parent="InstructionsContainer"]
 layout_mode = 2
-text = "Survive."
-label_settings = SubResource("LabelSettings_gwx30")
+text = "Stay alive and protect the shop. 
+Green bar is health. Yellow bar is shop health.
+Purchase ammo and purchase
+ health restores in the shop. WASD to move. 
+1 and 2 to change weapons.
+Mouse to look. Left click to fire.
+F to interact."
+label_settings = SubResource("LabelSettings_bfw1c")
+horizontal_alignment = 1
 
 [node name="InstructionsBack" type="Button" parent="InstructionsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Back"
 
 [node name="CreditsContainer" type="VBoxContainer" parent="."]
@@ -135,12 +154,16 @@ grow_vertical = 2
 
 [node name="Credits" type="Label" parent="CreditsContainer"]
 layout_mode = 2
-text = "Credits here"
-label_settings = SubResource("LabelSettings_gwx30")
+text = "Programming and Level Design: Aaron Ghiurau
+Music: Kevin Macleod
+SFX: bubaproducer, soundslikewillem 
+3D Models: Free from TurboSquid"
+label_settings = SubResource("LabelSettings_m71kj")
+horizontal_alignment = 1
 
 [node name="CreditsBack" type="Button" parent="CreditsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 80
 text = "Back"
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="OnPlayPressed"]

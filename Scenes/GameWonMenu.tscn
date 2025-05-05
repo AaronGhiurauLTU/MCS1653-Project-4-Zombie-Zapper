@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://jsvqubgthacx"]
+[gd_scene load_steps=5 format=3 uid="uid://cbermb6gmnxn5"]
 
-[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_a0mc2"]
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_n3qbw"]
 
 [sub_resource type="Shader" id="Shader_6tbh1"]
 code = "shader_type canvas_item;
@@ -28,7 +28,7 @@ shader_parameter/screen_size = Vector2(1920, 1080)
 [sub_resource type="LabelSettings" id="LabelSettings_gwx30"]
 font_size = 128
 
-[node name="GameOverMenu" type="Control" node_paths=PackedStringArray("mainMenuContainer")]
+[node name="GameWonMenu" type="Control" node_paths=PackedStringArray("mainMenuContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_a0mc2")
+script = ExtResource("1_n3qbw")
 mainMenuContainer = NodePath("VBoxContainer")
 
 [node name="PixelationEffect" type="ColorRect" parent="."]
@@ -67,13 +67,13 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Game Over"
+text = "Game Won"
 label_settings = SubResource("LabelSettings_gwx30")
 
 [node name="Play" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 80
-text = "Try Again"
+text = "Play Again"
 
 [node name="MainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2

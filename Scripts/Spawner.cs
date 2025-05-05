@@ -20,6 +20,8 @@ public partial class Spawner : Node3D
 			this.delay = delay;
 		}
 	}
+	public static bool finishedSpawning = false;
+	public static int enemiesAlive = 0;
 	private Queue<EnemyInformation> enemyWaves = new Queue<EnemyInformation>(new EnemyInformation[] {
 		new(1, 5),
 		new (1, 5),
@@ -49,8 +51,12 @@ public partial class Spawner : Node3D
 	private void OnSpawnCooldownTimeout()
 	{
 		if (enemyWaves.Count <= 0)
+		{
+			finishedSpawning = true;
 			return;
+		}
 
+		enemiesAlive++;
 		EnemyInformation enemyInformation = enemyWaves.Dequeue();
 		Enemy enemy = (Enemy)enemyScene.Instantiate();
 

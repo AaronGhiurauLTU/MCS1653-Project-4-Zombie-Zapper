@@ -31,6 +31,7 @@ public partial class Enemy : CharacterBody3D
 	private void OnHealthDepleted()
 	{
 		player.ChangeMoney(moneyDropped);
+		Spawner.enemiesAlive--;
 		QueueFree();
 	}
 

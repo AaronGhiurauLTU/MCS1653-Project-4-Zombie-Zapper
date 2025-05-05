@@ -43,6 +43,16 @@ background_mode = 2
 background_energy_multiplier = 0.1
 sky = SubResource("Sky_scrp7")
 ambient_light_source = 1
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.214139, 0.235722, 0.269651, 1)
+fog_density = 1.0
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.965
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.435192, 0.435192, 0.435192, 1)
+volumetric_fog_length = 55.54
+volumetric_fog_sky_affect = 0.715
 
 [sub_resource type="Shader" id="Shader_sbwyd"]
 code = "shader_type canvas_item;
@@ -2102,6 +2112,7 @@ environment = SubResource("Environment_7422h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.203744, -0.196316, -0.95914, -0.508991, -0.815639, 0.275065, -0.836311, 0.544236, 0.0662593, 0, 4.35185, 40.2616)
+light_energy = 0.6
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)

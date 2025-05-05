@@ -59,6 +59,8 @@ Godot Pathfinding Navigation AI: https://www.youtube.com/watch?v=EOocBMBbL-E
 
 Displaying 2D healthbars in 3D: https://www.youtube.com/watch?v=AAB6JwI3LVA
 
+Godot changing skybox: https://www.youtube.com/watch?v=jtW6OgGW2YU&t=2s
+
 <br>
 
 7. **What trouble did you have with this project?**

@@ -18,7 +18,7 @@
 
 1. **What are the controls to your game? How do we play?**
 
-WASD to move, F to interaction, left click to shoot, and 1 and 2 to switch between gun 1 and gun 2.
+WASD to move, F to interaction, left click to shoot, and 1 and 2 to switch between gun 1 and gun 2. Escape to shoot.
 
 <br>
 

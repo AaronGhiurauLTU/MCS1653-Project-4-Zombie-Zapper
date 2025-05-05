@@ -1,6 +1,7 @@
-[gd_scene load_steps=121 format=4 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=125 format=4 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
+[ext_resource type="Texture2D" uid="uid://rgski8ubeoo4" path="res://3rdPartyAssets/NightSkyHDRI001_1K-HDR.exr" id="1_p1id7"]
 [ext_resource type="PackedScene" uid="uid://bu2h4ud8ecsm3" path="res://Scenes/gas_station.tscn" id="3_abyuf"]
 [ext_resource type="Texture2D" uid="uid://bwm4scmfb7qbi" path="res://3rdPartyAssets/green-grass-texture-3065701264.jpg" id="3_lbyu1"]
 [ext_resource type="PackedScene" uid="uid://j5r3dam2r0v5" path="res://Scenes/spawner.tscn" id="5_rwrw7"]
@@ -30,6 +31,18 @@
 [ext_resource type="Texture2D" uid="uid://bslrpieudps8p" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_flowers-01.png" id="28_do4ap"]
 [ext_resource type="Texture2D" uid="uid://cbiwwyqk7mlru" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_flowers-02.png" id="29_ch5md"]
 [ext_resource type="PackedScene" uid="uid://3yt6wb80y6ij" path="res://Scenes/DoorInteract.tscn" id="62_27mx8"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_o3ptn"]
+panorama = ExtResource("1_p1id7")
+
+[sub_resource type="Sky" id="Sky_scrp7"]
+sky_material = SubResource("PanoramaSkyMaterial_o3ptn")
+
+[sub_resource type="Environment" id="Environment_7422h"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_scrp7")
+ambient_light_source = 1
 
 [sub_resource type="Shader" id="Shader_sbwyd"]
 code = "shader_type canvas_item;
@@ -2084,8 +2097,11 @@ shadow_mesh = SubResource("ArrayMesh_b7kmm")
 
 [node name="Level" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7422h")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.855333, -0.44339, 0.267974, -0.508991, -0.815639, 0.275065, 0.0966089, -0.371669, -0.923325, 0, 4.35185, 40.2616)
+transform = Transform3D(-0.203744, -0.196316, -0.95914, -0.508991, -0.815639, 0.275065, -0.836311, 0.544236, 0.0662593, 0, 4.35185, 40.2616)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)
@@ -2166,6 +2182,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3.4398
 
 [node name="DoorInteract2" parent="." instance=ExtResource("62_27mx8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41176, 0.176712, 20.1359)
+
+[node name="DoorInteract3" parent="." instance=ExtResource("62_27mx8")]
+transform = Transform3D(-0.689261, 0, -8.74228e-08, 0, 1, 0, 6.02571e-08, 0, -1, -17.4545, 0.242657, 20.4552)
+
+[node name="DoorInteract4" parent="." instance=ExtResource("62_27mx8")]
+transform = Transform3D(0.689261, 0, 0, 0, 1, 0, 0, 0, 1, -17.4738, 0.176712, 20.1359)
 
 [node name="Spawner" parent="." instance=ExtResource("5_rwrw7")]
 transform = Transform3D(23.9257, 0, 0, 0, 23.9257, 0, 0, 0, 23.9257, -0.335184, 0.79291, 91.568)

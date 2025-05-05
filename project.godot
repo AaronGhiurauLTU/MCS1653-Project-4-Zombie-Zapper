@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Zombie-Zapper"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 up={

@@ -15,7 +15,7 @@ public partial class Gun : MeshInstance3D
 	[Export] private float bulletSpeed = 10,
 		bulletAccuracy = .9f;
 	[Export] private Timer attackCooldown;
-	
+	[Export] private AudioStreamPlayer shootSound;
 	private bool onAttackCooldown = false,
 		disabled = false;
 	private int currentAmmo;
@@ -64,6 +64,8 @@ public partial class Gun : MeshInstance3D
 			currentAmmo--;
 
 			EmitSignal(SignalName.UpdateAmmo, currentAmmo, maxAmmo);
+
+			shootSound.Play();
 
 			onAttackCooldown = true;
 			attackCooldown.Start();

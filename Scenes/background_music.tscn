@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d38eac5jbowyv"]
+
+[ext_resource type="AudioStream" uid="uid://caqqhdmxbkhyg" path="res://Sounds/Music/Unseen Horrors.mp3" id="1_2n1tr"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_2n1tr")
+autoplay = true
+bus = &"Music"

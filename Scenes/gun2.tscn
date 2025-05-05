@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://btp8f0awk2fyg"]
+[gd_scene load_steps=10 format=3 uid="uid://btp8f0awk2fyg"]
 
 [ext_resource type="Script" path="res://Scripts/Gun.cs" id="1_s8dkb"]
 [ext_resource type="PackedScene" uid="uid://be46enjalc7fp" path="res://Scenes/gun_2.tscn" id="2_l1x8u"]
+[ext_resource type="AudioStream" uid="uid://c074cxqe3nmp2" path="res://Sounds/SFX/151026__bubaproducer__laser-shot-water.wav" id="3_ecnb7"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_y2wnb"]
 radius = 0.0005
@@ -20,7 +21,7 @@ albedo_color = Color(0.333333, 1, 1, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_n3kgf"]
 material = SubResource("StandardMaterial3D_5ed4b")
 
-[node name="gun2" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn", "attackCooldown")]
+[node name="gun2" type="MeshInstance3D" node_paths=PackedStringArray("bulletSpawn", "attackCooldown", "shootSound")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_y2wnb")
 surface_material_override/0 = SubResource("StandardMaterial3D_c7qas")
@@ -33,6 +34,7 @@ maxAmmo = 40
 bulletSpeed = 40.0
 bulletAccuracy = 0.97
 attackCooldown = NodePath("AttackCooldown")
+shootSound = NodePath("ShootSound")
 
 [node name="bullet_spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.017, 1.275)
@@ -56,5 +58,10 @@ mesh = SubResource("SphereMesh_n3kgf")
 
 [node name="gun2" parent="." instance=ExtResource("2_l1x8u")]
 transform = Transform3D(-0.04, 3.49691e-09, 0, 3.49691e-09, 0.04, 3.49691e-09, 3.0571e-16, 3.49691e-09, -0.04, 0, 0, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ecnb7")
+volume_db = -8.0
+bus = &"SFX"
 
 [connection signal="timeout" from="AttackCooldown" to="." method="OnAttackCooldownTimeout"]

@@ -29,12 +29,49 @@
 3. **Any assets used that you didn't create yourself?** <br> (art, music, etc. Just tell us where you got it, link it here)
 
 Grass texture: https://www.alldesigncreative.com/3d-textures/green-grass-texture/
+
 Tree models: https://www.turbosquid.com/3d-models/3d-shapespark-low-poly-plants-kit-1826978
+
 Gas Station: https://www.turbosquid.com/3d-models/gas-station-interior-624727
+
 Fast Firing Gun (Gun 1): https://www.turbosquid.com/3d-models/cartoony-laser-rifle-3d-model-1979586
-Slow Firing Gun (Gun 2): https://www.turbosquid.com/3d-models/3d-model-phantom-assault-weapon-1881502
+
+Slow Firing Gun (Gun 2): https://www.turbosquid.com/3d-models/
+
+3d-model-phantom-assault-weapon-1881502
+
 Zombie: https://www.turbosquid.com/3d-models/zombie-maps-normal-max-free/327193
+
 Skybox: https://ambientcg.com/view?id=NightSkyHDRI001
+
+Background Music:
+
+	"Unseen Horrors"
+
+	Instruments: Strings, Basses, Cellos, Violins, Brass, Percussion
+
+	Feel: Dark, Eerie, Unnerving
+
+	I originally wrote this as a piece for theramin, but I think it works better without. You can download this in uncompressed format here! Download comes with parts on their own, and also with the bonus theramin mix!
+
+	ISRC: USUAN1400043
+	Uploaded: 2014-10-10
+
+Sniper Gun Sound
+	
+	Laser Shot Water by bubaproducer
+
+	https://freesound.org/s/151026/
+
+	License: Attribution 4.0
+
+Fast Firing Gun Sound
+
+	Laser gun by soundslikewillem 
+	
+	https://freesound.org/s/190707/ 
+	
+	License: Attribution NonCommercial 4.0
 
 <br>
 

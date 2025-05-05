@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=130 format=4 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="Texture2D" uid="uid://rgski8ubeoo4" path="res://3rdPartyAssets/NightSkyHDRI001_1K-HDR.exr" id="1_p1id7"]
@@ -16,8 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://be46enjalc7fp" path="res://Scenes/gun_2.tscn" id="11_e4s0v"]
 [ext_resource type="Texture2D" uid="uid://cwgogok588qy7" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-1-01.png" id="11_lwhhr"]
 [ext_resource type="Texture2D" uid="uid://bsw3h1r63gih6" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-1-02.png" id="12_s2bmk"]
+[ext_resource type="Texture2D" uid="uid://fxv60ujhm004" path="res://3rdPartyAssets/green-medical-cross-symbol-on-transparent-background-free-png-346651577.png" id="13_41qyr"]
 [ext_resource type="Texture2D" uid="uid://c78hw8yrsdo7k" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-2-01.png" id="13_uea7a"]
 [ext_resource type="Texture2D" uid="uid://cdnf7b6mmwkfq" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-2-02.png" id="14_cr18l"]
+[ext_resource type="Texture2D" uid="uid://c42wk55ioe75l" path="res://3rdPartyAssets/Hammer-PNG-Clipart.png" id="14_kwgmr"]
 [ext_resource type="Texture2D" uid="uid://souc47qdco5p" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_hedge-01.png" id="15_45ikf"]
 [ext_resource type="Texture2D" uid="uid://gd4qiyrew6lq" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_hedge-02.png" id="16_dh1ju"]
 [ext_resource type="Texture2D" uid="uid://c7n6qrd5etgvh" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_shrubbery-1-01.png" id="17_udyoo"]
@@ -2122,7 +2124,7 @@ size = Vector2i(1920, 1080)
 
 [node name="Player" parent="." node_paths=PackedStringArray("gameOverMenu", "gameWonMenu") instance=ExtResource("1_ax62n")]
 unique_name_in_owner = true
-transform = Transform3D(-0.981436, -0.000479279, 0.191787, -0.000252497, 0.999999, 0.00120697, -0.191788, 0.00113614, -0.981436, 4.19243, 1.30157, 16.762)
+transform = Transform3D(-0.981436, -0.000479279, 0.191787, -0.000252497, 0.999999, 0.00120697, -0.191788, 0.00113614, -0.981436, 2.90106, 1.30157, 16.762)
 gameOverMenu = NodePath("../CanvasLayer/GameOverMenu")
 gameWonMenu = NodePath("../CanvasLayer/GameWonMenu")
 
@@ -2236,14 +2238,22 @@ gunType = 2
 transform = Transform3D(-8.74228e-10, -0.00917299, -0.0177723, 0, 0.0177723, -0.00917299, 0.02, -4.00964e-10, -7.76854e-10, -0.171265, -0.0401613, 0.616779)
 
 [node name="HealthInteract" parent="." instance=ExtResource("7_81jl5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.382343, 1.04693, 15.8012)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6.1685, 0.95285, 16.9443)
 ammount = 8
 
+[node name="Sprite3D2" type="Sprite3D" parent="HealthInteract"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0.635781)
+texture = ExtResource("13_41qyr")
+
 [node name="HealthInteract2" parent="." instance=ExtResource("7_81jl5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.383673, 1.04693, 19.1455)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6.16283, 0.915735, 19.3478)
 cost = -15
 ammount = 15
 type = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="HealthInteract2"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0.635781)
+texture = ExtResource("14_kwgmr")
 
 [node name="shapespark-low-poly-plants-kit" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1523, 0, 43.1249)

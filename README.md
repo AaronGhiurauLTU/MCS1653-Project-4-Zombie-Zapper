@@ -46,6 +46,10 @@ Skybox: https://ambientcg.com/view?id=NightSkyHDRI001
 
 Blood Splatter: Designed by starline / Freepik https://www.freepik.com/free-vector/red-ink-stains_1177180.htm#fromView=keyword&page=1&position=0&uuid=c1951209-3f96-4f0d-b983-9d2298531ef7&query=Blood+Splatter+Png
 
+Green Cross Sprite: https://ar.inspiredpencil.com/pictures-2023/green-medical-cross-logo
+
+Hammer Sprite: https://www.pngall.com/hammer-png/download/4664/
+
 Background Music:
 
 	"Unseen Horrors"
@@ -99,7 +103,7 @@ Shop Hit Sound
 	https://freesound.org/s/203375/
 
 	License: Creative Commons 0
-	
+
 <br>
 
 4. **Did you receive help from anyone outside this class?** <br> (list their names and what they helped with)

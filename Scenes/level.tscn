@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=128 format=4 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="Texture2D" uid="uid://rgski8ubeoo4" path="res://3rdPartyAssets/NightSkyHDRI001_1K-HDR.exr" id="1_p1id7"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://jsvqubgthacx" path="res://Scenes/GameOverMenu.tscn" id="8_b833o"]
 [ext_resource type="Texture2D" uid="uid://daftqunvyydfs" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_bark.jpg" id="8_ej8y6"]
 [ext_resource type="Texture2D" uid="uid://cdqku8xwl8euc" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-01.png" id="9_wg24i"]
+[ext_resource type="PackedScene" uid="uid://gf4vd4yy05p6" path="res://Scenes/gun_part_2(textured).tscn" id="10_iigu8"]
 [ext_resource type="Texture2D" uid="uid://d15nddd7xxros" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-02.png" id="10_ilvi2"]
+[ext_resource type="PackedScene" uid="uid://be46enjalc7fp" path="res://Scenes/gun_2.tscn" id="11_e4s0v"]
 [ext_resource type="Texture2D" uid="uid://cwgogok588qy7" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-1-01.png" id="11_lwhhr"]
 [ext_resource type="Texture2D" uid="uid://bsw3h1r63gih6" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-1-02.png" id="12_s2bmk"]
 [ext_resource type="Texture2D" uid="uid://c78hw8yrsdo7k" path="res://3rdPartyAssets/trees/shapespark-low-poly-plants-kit_branch-2-01.png" id="13_uea7a"]
@@ -2168,6 +2170,16 @@ mesh = SubResource("BoxMesh_4c7jt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_6qt47")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(4.06405, 0, 0, 0, 10.7379, 0, 0, 0, -14.8503, 13.3924, 1.31197, 18.1582)
+visible = false
+mesh = SubResource("BoxMesh_4c7jt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D4/StaticBody3D"]
+shape = SubResource("BoxShape3D_6qt47")
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(4.06405, 0, 0, 0, 10.7379, 0, 0, 0, 411.843, -21.0041, 1.58457, 17.0739)
 visible = false
@@ -2209,13 +2221,19 @@ transform = Transform3D(0.689261, 0, 0, 0, 1, 0, 0, 0, 1, -17.4738, 0.176712, 20
 transform = Transform3D(23.9257, 0, 0, 0, 23.9257, 0, 0, 0, 23.9257, -0.335184, 0.79291, 91.568)
 
 [node name="AmmoInteract" parent="." instance=ExtResource("6_y211j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05734, 1.26414, 12.2199)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.10295, 1.04497, 12.8705)
+
+[node name="Gun_Part_2(Textured)" parent="AmmoInteract" instance=ExtResource("10_iigu8")]
+transform = Transform3D(-4.37114e-09, -0.045865, 0.0888617, 0, 0.0888617, 0.045865, -0.1, 2.00482e-09, -3.88427e-09, 0.0893927, -0.385152, 0.895325)
 
 [node name="AmmoInteract2" parent="." instance=ExtResource("6_y211j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05734, 1.26414, 12.2199)
+transform = Transform3D(2.98023e-08, 0, -1, 0, 1, 0, 1, 0, 2.98023e-08, 6.12479, 0.961942, 15.0565)
 cost = -8
 ammoAmount = 20
 gunType = 2
+
+[node name="gun2" parent="AmmoInteract2" instance=ExtResource("11_e4s0v")]
+transform = Transform3D(-8.74228e-10, -0.00917299, -0.0177723, 0, 0.0177723, -0.00917299, 0.02, -4.00964e-10, -7.76854e-10, -0.171265, -0.0401613, 0.616779)
 
 [node name="HealthInteract" parent="." instance=ExtResource("7_81jl5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.382343, 1.04693, 15.8012)

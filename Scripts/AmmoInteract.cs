@@ -8,6 +8,6 @@ public partial class AmmoInteract : Node3D
 	[Export] private Label information;
 	public override void _Ready()
 	{
-		information.Text = $"Gun Type: Gun {gunType}\nCost: ${-1 * cost}\nAmmo: {ammoAmount}";
+		information.Text = $"Cost: ${-1 * cost}\nAmmo: {ammoAmount}";
 	}
 }

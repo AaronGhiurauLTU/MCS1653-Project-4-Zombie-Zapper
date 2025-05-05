@@ -1,10 +1,11 @@
-[gd_scene load_steps=130 format=4 uid="uid://dr7ep5h8f4804"]
+[gd_scene load_steps=131 format=4 uid="uid://dr7ep5h8f4804"]
 
 [ext_resource type="PackedScene" uid="uid://4vc7x5tl7u7o" path="res://Scenes/player.tscn" id="1_ax62n"]
 [ext_resource type="Texture2D" uid="uid://rgski8ubeoo4" path="res://3rdPartyAssets/NightSkyHDRI001_1K-HDR.exr" id="1_p1id7"]
 [ext_resource type="PackedScene" uid="uid://bu2h4ud8ecsm3" path="res://Scenes/gas_station.tscn" id="3_abyuf"]
 [ext_resource type="Texture2D" uid="uid://bwm4scmfb7qbi" path="res://3rdPartyAssets/green-grass-texture-3065701264.jpg" id="3_lbyu1"]
 [ext_resource type="PackedScene" uid="uid://cbermb6gmnxn5" path="res://Scenes/GameWonMenu.tscn" id="3_sk78r"]
+[ext_resource type="PackedScene" uid="uid://xegees8cpu8t" path="res://Scenes/PauseMenu.tscn" id="5_8ws17"]
 [ext_resource type="PackedScene" uid="uid://j5r3dam2r0v5" path="res://Scenes/spawner.tscn" id="5_rwrw7"]
 [ext_resource type="PackedScene" uid="uid://vdm3w25rnmv3" path="res://Scenes/AmmoInteract.tscn" id="6_y211j"]
 [ext_resource type="PackedScene" uid="uid://crrrfg7gvalr7" path="res://Scenes/HealthInteract.tscn" id="7_81jl5"]
@@ -2122,11 +2123,12 @@ light_energy = 0.6
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1920, 1080)
 
-[node name="Player" parent="." node_paths=PackedStringArray("gameOverMenu", "gameWonMenu") instance=ExtResource("1_ax62n")]
+[node name="Player" parent="." node_paths=PackedStringArray("gameOverMenu", "gameWonMenu", "pauseMenu") instance=ExtResource("1_ax62n")]
 unique_name_in_owner = true
 transform = Transform3D(-0.981436, -0.000479279, 0.191787, -0.000252497, 0.999999, 0.00120697, -0.191788, 0.00113614, -0.981436, 2.90106, 1.30157, 16.762)
 gameOverMenu = NodePath("../CanvasLayer/GameOverMenu")
 gameWonMenu = NodePath("../CanvasLayer/GameWonMenu")
+pauseMenu = NodePath("../CanvasLayer/PauseMenu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -2145,6 +2147,9 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="GameOverMenu" parent="CanvasLayer" instance=ExtResource("8_b833o")]
+visible = false
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_8ws17")]
 visible = false
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

@@ -18,11 +18,13 @@
 
 1. **What are the controls to your game? How do we play?**
 
-
+WASD to move, F to interaction, left click to shoot, and 1 and 2 to switch between gun 1 and gun 2.
 
 <br>
 
 2. **What creative additions did you make? How can we find them?**
+
+I used a shader to make the game look more pixelated. The player has to stay alive while protecting the shop to survive.
 
 <br>
 
@@ -108,7 +110,7 @@ Shop Hit Sound
 
 4. **Did you receive help from anyone outside this class?** <br> (list their names and what they helped with)
 
-
+No.
 
 <br>
 
@@ -135,11 +137,13 @@ Godot changing skybox: https://www.youtube.com/watch?v=jtW6OgGW2YU&t=2s
 
 7. **What trouble did you have with this project?**
 
+I had many issues getting the pixelated shader to work. It would not work with instantiated objects and had issues with UI and the layer it was on. Another major issue was importing models as they all had different formats. The zombie model was only in a 3D Studio Max file so I had to use a Blender add-on to import it and convert it to a usable format but all animations seemed to be lost.
 
 <br>
 
 8. **Is there anything else we should know?**
 
+No.
 
 
 <br><br><br><br><br>

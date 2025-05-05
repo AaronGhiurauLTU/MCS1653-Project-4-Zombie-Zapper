@@ -88,3 +88,10 @@ gun2={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+lightmapping/bake_quality/medium_quality_ray_count=64
+lightmapping/bake_quality/high_quality_ray_count=128
+lightmapping/bake_quality/ultra_quality_ray_count=512
+lightmapping/bake_performance/region_size=256
+lightmapping/bake_quality/medium_quality_probe_ray_count=128
+lightmapping/bake_quality/high_quality_probe_ray_count=256
+lightmapping/bake_quality/ultra_quality_probe_ray_count=512

@@ -15,7 +15,7 @@ public partial class Player : CharacterBody3D
 	[Export] private RayCast3D interactCast;
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
-	[Export] public Control gameOverMenu, gameWonMenu;
+	[Export] public Control gameOverMenu, gameWonMenu, pauseMenu;
 	[Export] private Sprite2D blood;
 	[Export] private AnimationPlayer bloodAnimation;
 	[Export] private AudioStreamPlayer hurtSound;
@@ -55,7 +55,7 @@ public partial class Player : CharacterBody3D
 	{
 		if (healthChange > 0)
 			return;
-			
+
 		bloodAnimation.Stop();
 		bloodAnimation.Play("splatter");
 		hurtSound.Play();
@@ -131,6 +131,22 @@ public partial class Player : CharacterBody3D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Input.IsActionJustPressed("ui_cancel"))
+		{
+			if (Input.MouseMode == Input.MouseModeEnum.Captured)
+			{
+				Input.MouseMode = Input.MouseModeEnum.Visible;
+				pauseMenu.Visible = true;
+				Engine.TimeScale = 0;
+			}
+			else
+			{
+				Input.MouseMode = Input.MouseModeEnum.Captured;
+				pauseMenu.Visible = false;
+				Engine.TimeScale = 1;
+			}
+		}
+		
 		if (Engine.TimeScale == 0)
 			return;
 
@@ -150,18 +166,7 @@ public partial class Player : CharacterBody3D
 			velocity += GetGravity() * (float)delta;
 		}
 
-		if (Input.IsActionJustPressed("ui_cancel"))
-		{
-			if (Input.MouseMode == Input.MouseModeEnum.Captured)
-			{
-				Input.MouseMode = Input.MouseModeEnum.Visible;
-			}
-			else
-			{
-				Input.MouseMode = Input.MouseModeEnum.Captured;
-			}
-		}
-		else if (Input.IsActionJustPressed("gun1"))
+		if (Input.IsActionJustPressed("gun1"))
 		{
 			SetGun(1);
 		}

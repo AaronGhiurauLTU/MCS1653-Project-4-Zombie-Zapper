@@ -156,7 +156,8 @@ grow_vertical = 2
 layout_mode = 2
 text = "Programming and Level Design: Aaron Ghiurau
 Music: Kevin Macleod
-SFX: bubaproducer, soundslikewillem 
+SFX: bubaproducer, soundslikewillem, 
+MrFossy, ArriGD, C_Rogers
 Blood Stain Sprite: starline / Freepik
 3D Models: Free from TurboSquid"
 label_settings = SubResource("LabelSettings_m71kj")

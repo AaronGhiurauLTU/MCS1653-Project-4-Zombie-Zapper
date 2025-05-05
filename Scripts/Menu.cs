@@ -20,6 +20,7 @@ public partial class Menu : Control
 	{
 		Engine.TimeScale = 1;
 		Visible = false;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 	private void OnResetPressed()
 	{

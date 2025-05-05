@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://xegees8cpu8t"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_0tsiy"]
+
+[sub_resource type="Shader" id="Shader_6tbh1"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
+
+uniform int pixel_size : hint_range(1, 64) = 4; // Pixel size
+uniform vec2 screen_size = vec2(1920.0, 1080.0); // Screen size (set manually)
+
+void fragment() {
+    //Pixel coordinates in screen space
+    vec2 pixel_coords = floor(FRAGCOORD.xy / float(pixel_size)) * float(pixel_size);
+    // Convert pixel coordinates to UVs for screen texture
+    vec2 uv = pixel_coords / screen_size;
+    // Get color from texture screen
+    COLOR = texture(SCREEN_TEXTURE, uv);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rsi84"]
+shader = SubResource("Shader_6tbh1")
+shader_parameter/pixel_size = 8
+shader_parameter/screen_size = Vector2(1920, 1080)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gwx30"]
+font_size = 128
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("mainMenuContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_0tsiy")
+mainMenuContainer = NodePath("VBoxContainer")
+
+[node name="PixelationEffect" type="ColorRect" parent="."]
+visible = false
+z_index = 13
+material = SubResource("ShaderMaterial_rsi84")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_gwx30")
+
+[node name="Continue" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Continue"
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Main Menu
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="OnContinuePressed"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="OnMainMenuPressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="OnQuitPressed"]

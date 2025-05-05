@@ -134,6 +134,8 @@ public partial class Spawner : Node3D
 	{
 		enemyScene = GD.Load<PackedScene>(enemyScenePath);
 		spawnCooldown.Start();
+		enemiesAlive = 0;
+		finishedSpawning = false;
 	}
 
 	private void OnSpawnCooldownTimeout()

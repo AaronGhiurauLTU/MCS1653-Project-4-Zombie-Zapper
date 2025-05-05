@@ -51,8 +51,11 @@ public partial class Player : CharacterBody3D
 		//GetTree().ChangeSceneToFile("res://Scenes/level.tscn");
 	}
 
-	private void OnHealthChanged(int newHealth)
+	private void OnHealthChanged(int newHealth, int healthChange)
 	{
+		if (healthChange > 0)
+			return;
+			
 		bloodAnimation.Stop();
 		bloodAnimation.Play("splatter");
 		hurtSound.Play();

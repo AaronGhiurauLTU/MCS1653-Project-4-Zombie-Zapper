@@ -2239,6 +2239,7 @@ transform = Transform3D(-8.74228e-10, -0.00917299, -0.0177723, 0, 0.0177723, -0.
 
 [node name="HealthInteract" parent="." instance=ExtResource("7_81jl5")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6.1685, 0.95285, 16.9443)
+cost = -5
 ammount = 8
 
 [node name="Sprite3D2" type="Sprite3D" parent="HealthInteract"]
@@ -2247,7 +2248,6 @@ texture = ExtResource("13_41qyr")
 
 [node name="HealthInteract2" parent="." instance=ExtResource("7_81jl5")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 6.16283, 0.915735, 19.3478)
-cost = -15
 ammount = 15
 type = 0
 

@@ -22,8 +22,11 @@ public partial class GasStation : Node3D
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
-	private void OnHealthChanged(int newHealth)
+	private void OnHealthChanged(int newHealth, int healthChange)
 	{
+		if (healthChange > 0)
+			return;
+			
 		hitSound.Play();
 		if (newHealth > 0)
 			player.camera.CameraShakeAsync();

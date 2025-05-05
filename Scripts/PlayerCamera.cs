@@ -28,7 +28,7 @@ public partial class PlayerCamera : Camera3D
 
             elapsed_time += (float)GetProcessDeltaTime();
 
-            GD.Print("Camera Shaked!");
+          //  GD.Print("Camera Shaked!");
 
             await ToSignal(GetTree(), "process_frame");
         }

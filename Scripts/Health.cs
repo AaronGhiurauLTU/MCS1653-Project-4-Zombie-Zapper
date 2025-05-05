@@ -13,7 +13,7 @@ public partial class Health : Node
 	// custom signal to fire when health reaches 0
 	[Signal] public delegate void HealthDepletedEventHandler();
 
-	[Signal] public delegate void HealthChangedEventHandler(int newHealth);
+	[Signal] public delegate void HealthChangedEventHandler(int newHealth, int change);
 	public void TakeDamage(int damage)
 	{
 		currentHealth -= damage;
@@ -21,7 +21,7 @@ public partial class Health : Node
 		// keep health from going below 0
 		currentHealth = Math.Max(0, currentHealth);
 
-		EmitSignal(SignalName.HealthChanged, currentHealth);
+		EmitSignal(SignalName.HealthChanged, currentHealth, -1 * damage);
 
 		healthBar.Visible = true;
 		healthBar.Value = (float)currentHealth / maxHealth;	
@@ -40,7 +40,7 @@ public partial class Health : Node
 		// keep health from going below 0
 		currentHealth = Math.Min(maxHealth, currentHealth);
 
-		EmitSignal(SignalName.HealthChanged, currentHealth);
+		EmitSignal(SignalName.HealthChanged, currentHealth, healthChange);
 
 		healthBar.Visible = true;
 		healthBar.Value = (float)currentHealth / maxHealth;	

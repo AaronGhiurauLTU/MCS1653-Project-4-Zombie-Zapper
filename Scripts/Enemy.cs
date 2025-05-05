@@ -38,7 +38,7 @@ public partial class Enemy : CharacterBody3D
 		animationPlayer.Play("death");
 	}
 
-	private void OnHealthChanged(int newHealth)
+	private void OnHealthChanged(int newHealth, int healthChange)
 	{
 		animationPlayer.Stop();
 		animationPlayer.Play("hit");

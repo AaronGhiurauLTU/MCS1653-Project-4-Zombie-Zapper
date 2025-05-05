@@ -44,6 +44,8 @@ Zombie: https://www.turbosquid.com/3d-models/zombie-maps-normal-max-free/327193
 
 Skybox: https://ambientcg.com/view?id=NightSkyHDRI001
 
+Blood Splatter: Designed by starline / Freepik https://www.freepik.com/free-vector/red-ink-stains_1177180.htm#fromView=keyword&page=1&position=0&uuid=c1951209-3f96-4f0d-b983-9d2298531ef7&query=Blood+Splatter+Png
+
 Background Music:
 
 	"Unseen Horrors"
@@ -73,6 +75,31 @@ Fast Firing Gun Sound
 	
 	License: Attribution NonCommercial 4.0
 
+Player Hurt Sound
+
+	Voice_AdultMale_PainGrunts_03.wav by MrFossy
+	
+	https://freesound.org/s/547201/
+	
+	License: Creative Commons 0
+
+Zombie Death Sound
+
+	Zombie Roar 1 by ArriGD
+	
+	https://freesound.org/s/144001/
+	
+	License: Creative Commons 0
+
+
+Shop Hit Sound
+
+	glass-shattering_01.ogg by C_Rogers
+
+	https://freesound.org/s/203375/
+
+	License: Creative Commons 0
+	
 <br>
 
 4. **Did you receive help from anyone outside this class?** <br> (list their names and what they helped with)
@@ -97,6 +124,8 @@ Godot Pathfinding Navigation AI: https://www.youtube.com/watch?v=EOocBMBbL-E
 Displaying 2D healthbars in 3D: https://www.youtube.com/watch?v=AAB6JwI3LVA
 
 Godot changing skybox: https://www.youtube.com/watch?v=jtW6OgGW2YU&t=2s
+
+3D Camera Shake: https://www.reddit.com/r/godot/comments/174nfgo/comment/ljz9ygu/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
 <br>
 

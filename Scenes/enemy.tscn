@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://cqjqhcxm7puoj"]
+[gd_scene load_steps=19 format=4 uid="uid://cqjqhcxm7puoj"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy.cs" id="1_uqw5r"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="2_k0p3a"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="3_4wis3"]
 [ext_resource type="Texture2D" uid="uid://cgkdl7nylllnq" path="res://3rdPartyAssets/zombie/zombie_zombie_diff.png" id="4_ed42n"]
+[ext_resource type="AudioStream" uid="uid://dj111qht4urt1" path="res://Sounds/SFX/144001__arrigd__zombie-roar-1.wav" id="5_sklxx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j4f4x"]
 
@@ -61,7 +62,159 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6577k")
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("agent", "health", "attackCooldown")]
+[sub_resource type="Animation" id="Animation_ttk52"]
+resource_name = "death"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("zombie/LOWPOLY:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape3D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SubViewport/HealthBar:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ht1bp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("zombie/LOWPOLY:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HurtBox/CollisionShape3D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_w1twn"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("zombie/LOWPOLY:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x51so"]
+_data = {
+"RESET": SubResource("Animation_ht1bp"),
+"death": SubResource("Animation_ttk52"),
+"hit": SubResource("Animation_w1twn")
+}
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("agent", "health", "attackCooldown", "animationPlayer", "zombieMesh")]
 collision_layer = 3
 collision_mask = 5
 script = ExtResource("1_uqw5r")
@@ -69,6 +222,8 @@ speed = 4.0
 agent = NodePath("NavigationAgent3D")
 health = NodePath("Health")
 attackCooldown = NodePath("AttackCooldown")
+animationPlayer = NodePath("AnimationPlayer")
+zombieMesh = NodePath("zombie/LOWPOLY")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.432363)
@@ -104,6 +259,7 @@ transparent_bg = true
 size = Vector2i(300, 250)
 
 [node name="HealthBar" parent="SubViewport" instance=ExtResource("3_4wis3")]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -122,6 +278,14 @@ transform = Transform3D(1.1464e-15, 2.62268e-08, 0.6, 0.6, -2.62268e-08, 6.37481
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.353661, 0, 0)
 mesh = SubResource("ArrayMesh_6vd43")
 skeleton = NodePath("")
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_sklxx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x51so")
+}
 
 [connection signal="body_entered" from="HurtBox" to="." method="OnHurtBoxEntered"]
 [connection signal="body_exited" from="HurtBox" to="." method="OnHurtBoxExited"]

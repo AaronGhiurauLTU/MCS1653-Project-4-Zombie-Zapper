@@ -10,6 +10,8 @@ public partial class Enemy : CharacterBody3D
 		moneyDropped = 1;
 	[Export] public Health health;
 	[Export] private Timer attackCooldown;
+	[Export] private AnimationPlayer animationPlayer;
+	[Export] private MeshInstance3D zombieMesh;
 	private bool setup = false;
 	private Player player;
 	private Player playerBeingAttacked;
@@ -32,16 +34,21 @@ public partial class Enemy : CharacterBody3D
 	{
 		player.ChangeMoney(moneyDropped);
 		Spawner.enemiesAlive--;
-		QueueFree();
+		animationPlayer.Stop();
+		animationPlayer.Play("death");
 	}
 
 	private void OnHealthChanged(int newHealth)
 	{
-
+		animationPlayer.Stop();
+		animationPlayer.Play("hit");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Engine.TimeScale == 0 || health.CurrentHealth <= 0)
+			return;
+
 		if (Math.Abs(originalPosition.Z - player.GlobalPosition.Z) < Math.Abs(originalPosition.Z - gasStation.GlobalPosition.Z))
 		{
 			target = player;

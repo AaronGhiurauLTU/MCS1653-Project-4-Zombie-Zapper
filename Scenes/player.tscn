@@ -1,16 +1,80 @@
-[gd_scene load_steps=14 format=3 uid="uid://4vc7x5tl7u7o"]
+[gd_scene load_steps=20 format=3 uid="uid://4vc7x5tl7u7o"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_g5mu6"]
+[ext_resource type="Script" path="res://Scripts/PlayerCamera.cs" id="2_l34fm"]
 [ext_resource type="PackedScene" uid="uid://co8r53aa2x7td" path="res://Scenes/health.tscn" id="3_a2i75"]
 [ext_resource type="PackedScene" uid="uid://btp8f0awk2fyg" path="res://Scenes/gun2.tscn" id="3_ax446"]
 [ext_resource type="PackedScene" uid="uid://ccktrj5rvhgi6" path="res://Scenes/gun.tscn" id="3_ko6w2"]
 [ext_resource type="PackedScene" uid="uid://hnpqyqqx0pmy" path="res://Scenes/healthBar.tscn" id="4_l0ejn"]
 [ext_resource type="Texture2D" uid="uid://cf3kvy2fjfcc0" path="res://Sprites/ZZ-crosshair.png" id="6_gbtbj"]
+[ext_resource type="Texture2D" uid="uid://bwjyyln6pj6ti" path="res://3rdPartyAssets/9219.png" id="6_jhsv6"]
 [ext_resource type="LabelSettings" uid="uid://caykdyumvr0c" path="res://Fonts/UI.tres" id="7_peqgk"]
+[ext_resource type="AudioStream" uid="uid://qud17ckb0fh2" path="res://Sounds/SFX/547201__mrfossy__voice_adultmale_paingrunts_03.wav" id="10_aahmr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3crd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_miu7r"]
+
+[sub_resource type="Animation" id="Animation_j26u0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_s1wyj"]
+resource_name = "splatter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vwynb"]
+_data = {
+"RESET": SubResource("Animation_j26u0"),
+"splatter": SubResource("Animation_s1wyj")
+}
 
 [sub_resource type="Gradient" id="Gradient_3xyu1"]
 offsets = PackedFloat32Array(0)
@@ -26,7 +90,7 @@ colors = PackedColorArray(0.607843, 0.533333, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_k2x47"]
 gradient = SubResource("Gradient_0i5k0")
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "buyAmmoHint", "ammoIndicator", "moneyIndicator", "buyHealthHint", "interactCast", "gun1", "gun2")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "health", "storeHealthBar", "doorUseHint", "buyAmmoHint", "ammoIndicator", "moneyIndicator", "buyHealthHint", "interactCast", "gun1", "gun2", "blood", "bloodAnimation", "hurtSound")]
 collision_layer = 4
 script = ExtResource("1_g5mu6")
 camera = NodePath("Camera3D")
@@ -43,6 +107,9 @@ buyHealthHint = NodePath("Control/BuyHealthHint")
 interactCast = NodePath("Camera3D/InteractCast")
 gun1 = NodePath("Camera3D/gunPosition/gun")
 gun2 = NodePath("Camera3D/gunPosition/gun2")
+blood = NodePath("Control/Blood")
+bloodAnimation = NodePath("Control/Blood/BloodAnimation")
+hurtSound = NodePath("Hurt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_w3crd")
@@ -50,6 +117,8 @@ shape = SubResource("CapsuleShape3D_w3crd")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
 current = true
+script = ExtResource("2_l34fm")
+magnitude = 0.03
 
 [node name="gunPosition" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174002, -0.229714, -0.469215)
@@ -79,6 +148,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Blood" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(968, 548)
+scale = Vector2(0.48, 0.48)
+texture = ExtResource("6_jhsv6")
+
+[node name="BloodAnimation" type="AnimationPlayer" parent="Control/Blood"]
+libraries = {
+"": SubResource("AnimationLibrary_vwynb")
+}
 
 [node name="HealthBar" parent="Control" instance=ExtResource("4_l0ejn")]
 layout_mode = 1
@@ -181,3 +261,7 @@ offset_right = 515.0
 offset_bottom = 88.0
 text = "Money: $0"
 label_settings = ExtResource("7_peqgk")
+
+[node name="Hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_aahmr")
+bus = &"SFX"

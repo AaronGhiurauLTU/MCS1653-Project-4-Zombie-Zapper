@@ -4,7 +4,7 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export] private float Speed = 5.0f;
-	[Export] private Camera3D camera;
+	[Export] public PlayerCamera camera;
 	[Export] private float minLookDownAngle = -45, 
 		maxLookDownAngle = 45;
 	[Export] private float cameraSensitivity = 0.05f;
@@ -16,6 +16,9 @@ public partial class Player : CharacterBody3D
 	[Export] private Gun gun1, gun2;
 	[Export] private int startingMoney = 0;
 	[Export] public Control gameOverMenu, gameWonMenu;
+	[Export] private Sprite2D blood;
+	[Export] private AnimationPlayer bloodAnimation;
+	[Export] private AudioStreamPlayer hurtSound;
 	private Gun currentGun;
 	private int currentMoney;
 	private Vector2 mouseLook = Vector2.Zero;
@@ -50,7 +53,9 @@ public partial class Player : CharacterBody3D
 
 	private void OnHealthChanged(int newHealth)
 	{
-
+		bloodAnimation.Stop();
+		bloodAnimation.Play("splatter");
+		hurtSound.Play();
 	}
 
 	private void OnBulletFired(int currentAmmo, int maxAmmo)

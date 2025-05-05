@@ -5,6 +5,7 @@ public partial class GasStation : Node3D
 {	
 	[Export] public Health health;
 	[Export] public Player player;
+	[Export] public AudioStreamPlayer3D hitSound;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,7 +24,9 @@ public partial class GasStation : Node3D
 
 	private void OnHealthChanged(int newHealth)
 	{
-
+		hitSound.Play();
+		if (newHealth > 0)
+			player.camera.CameraShakeAsync();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

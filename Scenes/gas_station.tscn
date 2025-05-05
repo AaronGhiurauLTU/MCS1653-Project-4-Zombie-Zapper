@@ -1415,6 +1415,7 @@ script = ExtResource("1_02t8d")
 health = NodePath("Health")
 
 [node name="gas_station_no_pumps" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.43375)
 
 [node name="gs" type="MeshInstance3D" parent="gas_station_no_pumps"]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)

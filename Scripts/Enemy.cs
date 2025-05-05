@@ -4,15 +4,17 @@ using System;
 public partial class Enemy : CharacterBody3D
 {
 	[Export] private float speed = 2, accel = 18;
-	private Player target;
+	private Node3D target;
 	[Export] private NavigationAgent3D agent;
 	[Export] private int damage = 1,
 		moneyDropped = 1;
 	[Export] public Health health;
 	[Export] private Timer attackCooldown;
 	private bool setup = false;
+	private Player player;
 	private Player playerBeingAttacked;
 	private GasStation gasStation;
+	private Vector3 originalPosition;
 
 	private bool onAttackCooldown = false,
 		attackingShop = false;
@@ -22,12 +24,13 @@ public partial class Enemy : CharacterBody3D
 		health.HealthDepleted += OnHealthDepleted;
 		health.HealthChanged += OnHealthChanged;
 		gasStation = GetParent().GetParent().GetNode<GasStation>("GasStation");
-		target = GetParent().GetParent().GetNode<Player>("Player");
+		player = GetParent().GetParent().GetNode<Player>("Player");
+		originalPosition = GlobalPosition;
 	}
 
 	private void OnHealthDepleted()
 	{
-		target.ChangeMoney(moneyDropped);
+		player.ChangeMoney(moneyDropped);
 		QueueFree();
 	}
 
@@ -38,6 +41,15 @@ public partial class Enemy : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (Math.Abs(originalPosition.Z - player.GlobalPosition.Z) < Math.Abs(originalPosition.Z - gasStation.GlobalPosition.Z))
+		{
+			target = player;
+		}
+		else
+		{
+			target = gasStation;
+		}
+
 		// skip first frame to allow nav mesh to syncXhronize
 		if (!setup)
 		{
